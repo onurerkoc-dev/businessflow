@@ -1,37 +1,6 @@
 import Image from "next/image";
-import ppfPhoto from "@/assets/images/service-ppf.jpg";
-import ceramicPhoto from "@/assets/images/service-ceramic.jpg";
-import detailingPhoto from "@/assets/images/service-detailing.jpg";
-
-const services = [
-  {
-    id: "ppf",
-    title: "PPF Kaplama",
-    description:
-      "Boyalı yüzeye uygulanan şeffaf film, taş sıçraması ve yüzeysel çiziklere karşı fiziksel bir koruma katmanı oluşturur.",
-    image: ppfPhoto,
-    alt: "İki uygulamacının otomobil kaputuna şeffaf boya koruma filmi yerleştirmesi",
-    sizes: "(min-width: 64rem) 52vw, (min-width: 48rem) 46vw, 100vw",
-  },
-  {
-    id: "ceramic",
-    title: "Seramik Kaplama",
-    description:
-      "Boya üzerinde su itici bir katman oluşturur. Yüzeyin temizlenmesini ve düzenli bakımını kolaylaştırır.",
-    image: ceramicPhoto,
-    alt: "Seramik kaplama ürününün şişeden mavi aplikatöre damlatılması",
-    sizes: "(min-width: 64rem) 24vw, (min-width: 48rem) 46vw, 100vw",
-  },
-  {
-    id: "detailing",
-    title: "Detailing",
-    description:
-      "İç ve dış yüzeylere ayrıntılı temizlik ve bakım uygulanır. Boya yüzeyi, ihtiyacına göre polisajla iyileştirilir.",
-    image: detailingPhoto,
-    alt: "Otomobilin ön çamurluğuna makineyle polisaj uygulanması",
-    sizes: "(min-width: 64rem) 24vw, (min-width: 48rem) 46vw, 100vw",
-  },
-];
+import Link from "next/link";
+import { services } from "@/data/services";
 
 export function Services() {
   return (
@@ -58,17 +27,20 @@ export function Services() {
                   src={service.image}
                   alt={service.alt}
                   fill
-                  sizes={service.sizes}
+                  sizes={service.previewSizes}
                   loading="lazy"
                   placeholder="blur"
                 />
               </div>
               <div className="service-copy">
                 <h3 id={`${service.id}-title`}>{service.title}</h3>
-                <p>{service.description}</p>
+                <p>{service.summary}</p>
               </div>
             </article>
           ))}
+        </div>
+        <div className="services-preview-link">
+          <Link className="button button-dark" href="/hizmetler">Tüm Hizmetler</Link>
         </div>
       </div>
     </section>

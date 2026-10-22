@@ -1,6 +1,6 @@
 # BusinessFlow — Premium frontend redesign
 
-Frontend; ana sayfa ve bağımsız `/galeri` sayfasından oluşur. Faz 4'te kategori filtreli ve erişilebilir lightbox içeren galeri, ortak fotoğraf verileri ve gerçek navigasyon bağlantıları eklendi. Hero ve Services bileşenleri korundu. Backend, veritabanı, admin, talep yönetimi ve hizmet detay sayfaları içermez. Yeni bağımlılık eklenmedi.
+Frontend; ana sayfa, bağımsız `/galeri` ve `/hizmetler` sayfalarından oluşur. Faz 5'te ortak TypeScript hizmet verisi, hizmet kataloğu ve gerçek katalog bağlantıları eklendi. Ana sayfanın hizmet düzeni, hero ve galeri tasarımları korunur. Backend, veritabanı, admin, talep yönetimi ve hizmet detay sayfaları içermez. Yeni bağımlılık eklenmedi.
 
 **VANTA geçici proje markasıdır.** Kullanıcı arayüzünde demo etiketleri gösterilmez; gerçek bir adres, telefon, müşteri yorumu, sertifika, garanti veya geçmiş proje iddiası eklenmemiştir. Demo niteliği bu belgede kayıtlıdır; `robots` ayarı indekslemeyi engeller.
 
@@ -36,22 +36,25 @@ Bizde tek parça, ekran genişliğinde uygulama fotoğrafı; sol/alt bölgede de
 - `src/app/layout.tsx`: Türkçe dil, VANTA metadata, indeksleme engeli, ortak header ve içeriğe geç bağlantısı.
 - `src/app/page.tsx`: Ana içerik, sırasıyla `Hero`, `Services` ve `GalleryPreview` bileşimi.
 - `src/components/header.tsx`: Kompakt marka, ortak navigasyon ve hizmet CTA'sı. Server Component; bağlantılar route durumunu okuyabilen küçük `NavigationLinks` bileşeninden gelir.
-- `src/components/navigation-links.tsx`: Client Component. `usePathname` ile doğru `aria-current="page"` durumunu verir. Ana sayfada mevcut hash hedeflerini, diğer sayfalarda `/#...` hedeflerini kullanır. Galeri bağlantısı `/galeri` adresine gider.
+- `src/components/navigation-links.tsx`: Client Component. `usePathname` ile doğru `aria-current="page"` durumunu verir. Hizmet adları ana sayfada mevcut hash hedeflerini, diğer sayfalarda `/#...` hedeflerini kullanır. Galeri bağlantısı `/galeri`, Hizmetleri İncele butonu `/hizmetler` adresine gider.
 - `src/components/hero.tsx`: Mevcut hero metni ve responsive gerçek fotoğraf. Eski düz hizmet listesi bu bileşenden çıkarıldı; hero'nun kendisi korunur. Server Component.
-- `src/components/services.tsx`: Üç fotoğraflı hizmet anlatımı. Metinler, görsel import'ları, alt açıklamaları, anchor kimlikleri ve responsive `sizes` değerleri aynı dosyadaki küçük `services` dizisinde tutulur. Ayrı bir veri katmanı veya kart bileşeni eklenmez. Her kayıt bir semantik `article` olarak render edilir. Server Component.
+- `src/components/services.tsx`: Üç fotoğraflı ana sayfa hizmet önizlemesi. Ortak `services` dizisini `map()` ile semantik `article` öğelerine dönüştürür. Mevcut düzen ve anchor kimlikleri korunur. Tüm Hizmetler bağlantısı `/hizmetler` adresine gider. Server Component.
+- `src/data/services.ts`: `Service` tipi ve üç hizmetin ortak dizisi. `id`, `slug`, `title`, `summary`, statik `image`, `alt` ve önizleme `sizes` değerlerini içerir.
+- `src/app/hizmetler/page.tsx`: Bağımsız katalog, H1/H2 hiyerarşisi, stok fotoğraf notu ve özel metadata. Server Component.
 - `src/components/gallery-preview.tsx`: Uygulama Detayları bölümü. Ortak dizide `previewSizes` tanımlı dört kayıt `figure` / `figcaption` olarak render edilir. Server Component; altındaki Next.js Link, bağımsız galeriye gider. Önizlemenin fotoğraf düzeni korunur.
 - `src/data/gallery.ts`: Sekiz farklı fotoğrafın tipli ortak dizisi. ID, kategori, görsel, alt metin, caption, kırpım konumu, opsiyonel önizleme boyutu ve kaynak/lisans bilgileri içerir.
 - `src/app/galeri/page.tsx`: Galeri route'u, statik giriş, stok fotoğraf notu ve sayfaya özel metadata. Server Component.
 - `src/components/gallery.tsx`: Galerinin filtre ve lightbox etkileşimlerini kapsayan Client Component.
 - `src/components/mobile-menu.tsx`: Native `details/summary` üzerine Escape, dışarı tıklama, bağlantı seçimi ve breakpoint değişiminde kapanma ekleyen Client Component. Tasarımı ve uygulaması Faz 4'te değişmedi.
 - `tests/gallery.browser.js`: Mevcut Playwright MCP'de çalıştırılabilen, bağımlılık eklemeyen galeri kontrolleri.
+- `tests/services.browser.js`: Mevcut Playwright MCP'de çalışan hizmet kataloğu, navigasyon ve responsive kontrolleri.
 - `src/assets/images/detailing-hero.jpg`: Masaüstü fotoğrafı.
 - `src/assets/images/detailing-hero-mobile.jpg`: Aynı fotoğrafın mobil kompozisyonu.
 - `src/assets/images/SOURCES.md`: Fotoğrafçı, kaynak, lisans, çözünürlük ve kırpma kaydı.
 - `src/assets/images/service-ppf.jpg`, `service-ceramic.jpg`, `service-detailing.jpg`: WAVYVISUALS / Pexels lisanslı gerçek uygulama fotoğrafları; kaynak kayıtları `SOURCES.md` içindedir.
 - `src/assets/images/gallery-ppf.jpg`, `gallery-ceramic.jpg`, `gallery-correction.jpg`, `gallery-care.jpg`: Galeriye özel dört gerçek fotoğraf. Fotoğrafçı, kaynak, lisans ve sıkıştırma kayıtları `SOURCES.md` içindedir.
 
-Eski `public/images/detailing-study.svg` silindi. Teklif popover'ı, demo/geçici/yakında etiketleri ve hedefi olmayan navigasyon öğeleri kaldırıldı. “Hizmetleri İncele” mevcut hizmet geçişine, hizmet adları ilgili gerçek anchor hedeflerine gider. Hazır olmayan sayfalara link oluşturulmaz.
+Eski `public/images/detailing-study.svg` silindi. Teklif popover'ı, demo/geçici/yakında etiketleri ve hedefi olmayan navigasyon öğeleri kaldırıldı. Header'daki “Hizmetleri İncele” kataloğa, hero'daki aynı metinli bağlantı ana sayfanın hizmet önizlemesine, hizmet adları ilgili gerçek anchor hedeflerine gider. Hazır olmayan sayfalara link oluşturulmaz.
 
 ## Tasarım sistemi
 
@@ -231,3 +234,49 @@ npm run start -- --port 3007
 Sunucu zaten çalışıyorsa yeniden başlatmak yerine mevcut adresi kullanın. Tarayıcıda `/galeri` adresini, kategori düğmelerini ve fotoğrafların Büyüt kontrollerini inceleyebilirsiniz.
 
 Gerçek cihaz, Safari/Firefox ve ekran okuyucu testleri yapılmadı. Stok fotoğrafların işletmeye ait onaylı çekimlerle değiştirilmesi ve yayın SEO ayarları sonraki kararları gerektirir. Backend, admin, formlar, Docker ve Git işlemleri bu kapsamda yapılmadı.
+
+## Faz 5 — Hizmet kataloğu ve öğrenme notları
+
+`src/app/hizmetler/page.tsx`, App Router'ın klasör/dosya kuralıyla doğrudan `/hizmetler` URL'sini oluşturur. Root layout ortak header'ı sağlar. Sayfa kendine ait title ve description tanımlar; global `noindex, nofollow` politikasını değiştirmez. İçerikte tek H1 ve üç hizmet için H2 kullanılır.
+
+`src/data/services.ts` içindeki `Service` tipi; `id`, `slug`, `title`, `summary`, `image`, `alt` ve `previewSizes` alanlarını zorunlu tutar. Statik görsel tipi `StaticImageData`dır. Ana sayfa ve katalog aynı `services` dizisini kullanır; metin ve fotoğraf kayıtları çoğaltılmaz. İki görünüm de `map()` ile üç `article` üretir; `key` sabit hizmet ID'sidir. State, API client veya genel amaçlı veri katmanı eklenmedi.
+
+`id`, ana sayfadaki `#ppf`, `#ceramic`, `#detailing` hedeflerini korur. `slug`, sonraki aşamada kullanılacak detay URL'sinin son parçasıdır:
+
+| Hizmet | Slug | Gelecekteki detay URL'si |
+| --- | --- | --- |
+| PPF Kaplama | `ppf-kaplama` | `/hizmetler/ppf-kaplama` |
+| Seramik Kaplama | `seramik-kaplama` | `/hizmetler/seramik-kaplama` |
+| Detailing | `detailing` | `/hizmetler/detailing` |
+
+Bu detay sayfaları bu aşamada oluşturulmadı; URL'lere giden kullanıcı bağlantısı yoktur. Arayüzde işlevsiz detay düğmesi veya yakında etiketi eklenmedi.
+
+Ana sayfa önizlemesi mevcut asimetrik yerleşimi korur. Katalogda ise kırık beyaz girişin ardından koyu grafit yüzeyde geniş bir PPF satırı bulunur: metin solda, fotoğraf sağdadır. Seramik ve detailing aynı satırdaki iki büyük kare fotoğraf ve altlarındaki kısa açıklamalarla ayrılır. Kart yüzeyi, gölge, dekoratif ikon veya yeni font eklenmedi. Görsel incelemede seramik aplikatörünün kenarda kalması görülerek alt sıranın fotoğraf oranı kareye alındı; şişe, damla ve aplikatör birlikte görünür.
+
+768 px altında katalog tek sütuna geçer; fotoğraf önce, açıklama sonra gelir. PPF ve seramik 4:5, detailing 1:1 oranını kullanır. Sadece sayfanın gerektirdiği üç hizmet ve kısa giriş bulunur; ek satış bölümü eklenmedi. Yeni CSS `@layer components` içinde `services-page`, `catalog-` ve gerekli bağlantı sınıflarıyla sınırlıdır; mevcut token'lar kullanılır.
+
+Hem Services hem ServicesPage sunucu bileşenidir: tarayıcı state'i veya event handler gerekmez. Yeni Client Component oluşturulmadı. Ortak veriler sunucuda HTML'e dönüşür. Mevcut NavigationLinks, pathname üzerinden hizmet CTA'sına doğru `aria-current="page"` değerini verir; aktif durumda sınırlı bakır çerçeve kullanılır.
+
+Görseller önceki aşamada optimize edilmiş gerçek Pexels çekimleridir. `next/image`, statik import, `fill`, responsive `sizes`, lazy loading ve blur placeholder kullanır. `aspect-ratio` görsele önceden yer ayırır. `sizes` katalog ve önizlemenin farklı genişliklerine göre ayrı tutulur. Çalışma anında uzaktaki stok servisine bağımlılık yoktur. Fotoğraf dosyaları değiştirilmedi; kaynak ve kullanım notu `SOURCES.md` içinde güncellendi.
+
+Header'ın desktop/mobil Hizmetleri İncele bağlantısı `/hizmetler` adresine taşındı. Ana sayfa önizlemesinin altına Tüm Hizmetler eklendi. İkisi de Next.js Link kullanır. Hero'nun mevcut `#services-intro` bağlantısı ve header'daki hizmet adı anchor'ları korunur. Galeri bağlantıları ve aktif sayfa davranışı devam eder. Eski galeri testinden yalnızca artık header CTA'sı olmayan `services-intro` beklentisi çıkarıldı.
+
+### Faz 5 doğrulaması — 22 Ekim 2026
+
+- `npm run lint`: başarılı.
+- `npx --no-install eslint tests/services.browser.js tests/gallery.browser.js`: başarılı, hata/uyarı yok.
+- Son `npm run build`: başarılı; `/`, `/galeri` ve `/hizmetler` statik üretildi. Görsel kırpım düzeltmesinden sonra yeniden çalıştırıldı.
+- `npx --no-install tsc --noEmit`: başarılı; son build sonrasında çalıştırıldı.
+- Son production build `http://127.0.0.1:3008` üzerinde çalıştırıldı. `/hizmetler` doğrudan HTTP 200 döndürdü.
+- `tests/services.browser.js`, kurulu Playwright MCP üzerinden gerçekten çalıştırıldı ve geçti. 1440 × 1000, 1280 × 900, 768 × 1024, 390 × 844, 375 × 812 kontrol edildi; ekran görüntüleri incelendi. Üç görsel, alt metinler, `sizes`/`srcset`, lazy loading, başlık hiyerarşisi, metadata, noindex ve yatay taşma kontrolleri geçti.
+- Desktop/mobil header CTA'sı, Tüm Hizmetler bağlantısı, Enter/Space ile menü/bağlantı kullanımı, menünün seçim sonrası kapanması ve doğru aktif sayfa kontrol edildi. Henüz var olmayan detay sayfalarına bağlantı olmadığı doğrulandı.
+- `tests/gallery.browser.js` regresyonu geçti: bütün kategori filtreleri, lightbox, Escape/odak dönüşü, arka plan engeli, responsive görünümler ve galeri/ana sayfa navigasyonu çalışıyor.
+- Ana sayfada üç hizmet, dört galeri fotoğrafı ve masaüstünde mevcut asimetrik hizmet düzeni korundu. Önizleme metinlerinin navigasyon öncesi/sonrası eşitliği kontrol edildi; mobil görünüm incelendi.
+- Hero, GalleryPreview, Gallery ve galeri page dosyalarının SHA-256 değerleri çalışma öncesiyle aynı. Production konsolunda hata veya uyarı görülmedi.
+- Hesaplanan metin/zemin kontrastları girişte 15,56:1 ve 5,44:1; koyu katalogda 15,56:1 ve 8,62:1.
+
+Uygulamayı `frontend` dizininde `npm run dev` ile çalıştırın. Production kontrolü için sırayla `npm run lint`, `npm run build`, `npx --no-install tsc --noEmit`, `npm run start -- --port 3008` kullanın. Sunucu zaten çalışıyorsa mevcut adresi açın.
+
+Tarayıcı kontrollerini tekrarlamak için kurulu Playwright MCP'de çalışan uygulamanın bir sekmesini açıp `browser_run_code_unsafe` aracına `filename: "frontend/tests/services.browser.js"` veya `filename: "frontend/tests/gallery.browser.js"` verin. Testler sekmenin origin'ini kullanır. Bu dosyalar bağımsız bir CLI test runner'ı değildir; yeni test bağımlılığı eklenmedi.
+
+Hizmet detay sayfaları, backend/API bağlantısı ve işletmeye ait onaylı çekimler henüz yoktur. Gerçek cihaz, Safari/Firefox ve ekran okuyucu testleri yapılmadı. Backend, MySQL, Flyway, Docker, admin ve Git işlemleri bu aşamada yapılmadı.

@@ -2,6 +2,14 @@
 
 Kontrol tarihi: 22 Ekim 2026.
 
+## Faz 5 — Bağımsız /hizmetler sayfası
+
+Yeni fotoğraf indirilmedi, üretilmedi veya dosyası değiştirilmedi. Faz 2'de kayıtlı WAVYVISUALS / Pexels License kapsamındaki `service-ppf.jpg`, `service-ceramic.jpg` ve `service-detailing.jpg` tekrar kullanılır. Kaynak URL'leri, lisans ve dosya bilgileri aşağıdaki Faz 2 tablosunda korunur.
+
+Ana sayfa ve hizmetler sayfası aynı `frontend/src/data/services.ts` kayıtlarını kullanır. Katalogda PPF fotoğrafı yatay; seramik ve detailing fotoğrafları masaüstü/tablette kare gösterilir. Mobilde PPF ve seramik 4:5, detailing 1:1 oranındadır. Kırpım yalnızca CSS ile uygulanır; kaynak dosyalara kalıcı kırpma yapılmadı. Seramik fotoğrafı ürünün aplikatöre hazırlanmasını, detailing fotoğrafı dış yüzey bakımının polisaj adımını gösterir. Görseller VANTA'nın müşteri işleri olarak sunulmaz.
+
+Teknik metin kontrolü için birincil referanslar: https://www.xpel.com/products/category/paint-protection-film ve https://www.xpel.com/products/automotive-ceramic-coating. Fiziksel film koruması ile yüzeyin su iticiliği/temizlik kolaylığı ayrımı gözetildi. Bu referanslar VANTA'nın XPEL ürünü kullandığı, yetkili uygulamacı olduğu veya ürün garantisi sunduğu anlamına gelmez; arayüzde böyle bir marka veya garanti iddiası yoktur.
+
 ## Faz 4 — Bağımsız /galeri sayfası
 
 Yeni fotoğraf indirilmedi veya üretilmedi. Önceki aşamalarda lisans kaydı tutulan sekiz farklı fotoğraf tekrar kullanılır; `detailing-hero-mobile.jpg` aynı çekimin kırpımı olduğundan ayrı bir galeri fotoğrafı sayılmaz. Pexels lisansı ve sekiz kaynak sayfası bu aşamada yeniden kontrol edildi. Lisans: https://www.pexels.com/license/.

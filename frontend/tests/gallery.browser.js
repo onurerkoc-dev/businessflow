@@ -80,7 +80,7 @@ async (page) => {
   await page.getByRole("link", { name: "Tüm Galeriyi Gör", exact: true }).click();
   await page.waitForURL("**/galeri");
   assert(await page.locator('.desktop-nav a[aria-current="page"]').textContent() === "Galeri", "Active gallery navigation");
-  for (const id of ["home", "ppf", "ceramic", "detailing", "services-intro"]) {
+  for (const id of ["home", "ppf", "ceramic", "detailing"]) {
     await page.goto(`${baseUrl}/galeri`);
     await page.locator(`.desktop-nav a[href="/#${id}"]`).click();
     await page.waitForURL(`**/#${id}`);
