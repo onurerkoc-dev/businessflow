@@ -80,7 +80,7 @@ async (page) => {
   await page.getByRole("link", { name: "Tüm Galeriyi Gör", exact: true }).click();
   await page.waitForURL("**/galeri");
   assert(await page.locator('.desktop-nav a[aria-current="page"]').textContent() === "Galeri", "Active gallery navigation");
-  for (const id of ["home", "ppf", "ceramic", "detailing", "services-intro"]) {
+  for (const id of ["home"]) {
     await page.goto(`${baseUrl}/galeri`);
     await page.locator(`.desktop-nav a[href="/#${id}"]`).click();
     await page.waitForURL(`**/#${id}`);
@@ -89,15 +89,21 @@ async (page) => {
       return bounds && bounds.top >= 84 && bounds.top < innerHeight;
     }, id);
   }
+  for (const slug of ["ppf-kaplama", "seramik-kaplama", "detailing"]) {
+    await page.goto(`${baseUrl}/galeri`);
+    await page.locator(`.desktop-nav a[href="/hizmetler/${slug}"]`).click();
+    await page.waitForURL(`**/hizmetler/${slug}`);
+    assert(await page.locator(".service-detail h1").count() === 1, "Header opens service detail");
+  }
   await page.locator(".desktop-nav").getByRole("link", { name: "Galeri", exact: true }).click();
   await page.waitForURL("**/galeri");
   await page.setViewportSize({ width: 375, height: 812 });
-  await page.locator("summary").focus();
+  await page.locator(".mobile-menu > summary").focus();
   await page.keyboard.press("Enter");
   assert(await page.locator('#mobile-navigation a[aria-current="page"]').textContent() === "Galeri", "Mobile active gallery navigation");
-  await page.locator('#mobile-navigation a[href="/#ceramic"]').click();
-  await page.waitForURL("**/#ceramic");
-  await page.locator("summary").click();
+  await page.locator('#mobile-navigation a[href="/hizmetler/seramik-kaplama"]').click();
+  await page.waitForURL("**/hizmetler/seramik-kaplama");
+  await page.locator(".mobile-menu > summary").click();
   await page.locator("#mobile-navigation").getByRole("link", { name: "Galeri", exact: true }).click();
   await page.waitForURL("**/galeri");
   assert(await page.locator(".mobile-menu").evaluate((el) => !el.open), "Mobile menu must close after navigation");
