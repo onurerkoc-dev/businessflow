@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { services } from "@/data/services";
 
 const description =
@@ -47,6 +48,7 @@ export default function ServicesPage() {
             <div className="catalog-copy">
               <h2 id={`catalog-${service.id}-title`}>{service.title}</h2>
               <p>{service.summary}</p>
+              <Link className="detail-text-link" href={`/hizmetler/${service.slug}`}>{service.title} detayları</Link>
             </div>
           </article>
         ))}

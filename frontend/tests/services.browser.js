@@ -16,7 +16,7 @@ async (page) => {
     assert(JSON.stringify(await page.locator(".catalog-copy h2").allTextContents()) === JSON.stringify(titles), "Three service headings");
     assert(await page.locator('meta[name="robots"]').getAttribute("content") === "noindex, nofollow", "Global noindex must remain");
     assert(await page.locator('meta[name="description"]').getAttribute("content") === "PPF kaplama, seramik kaplama ve iç/dış araç bakımı uygulamalarını inceleyin.", "Services meta description");
-    assert(await page.locator('a[href^="/hizmetler/"]').count() === 0, "No links to unbuilt detail routes");
+    assert(await page.locator('.catalog-copy a[href^="/hizmetler/"]').count() === 3, "Three catalog detail links");
     for (const image of await page.locator(".catalog-media img").all()) {
       await image.scrollIntoViewIfNeeded();
       await image.evaluate((el) => el.decode());
@@ -62,6 +62,6 @@ async (page) => {
   assert(await page.locator(".mobile-menu").evaluate((el) => !el.open), "Mobile menu closes on navigation");
   await page.goto(`${baseUrl}/`);
   assert(JSON.stringify(await page.locator(".service-copy").allTextContents()) === JSON.stringify(preview), "Homepage services unchanged after navigation");
-  results.push({ headerLink: true, previewLink: true, mobileMenu: true, galleryLink: true, homepageContent: true, unbuiltDetailLinks: false });
+  results.push({ headerLink: true, previewLink: true, mobileMenu: true, galleryLink: true, homepageContent: true, detailLinks: 3 });
   return results;
 }

@@ -31,6 +31,28 @@ Kategoriler fotoğraftaki işleme göre atanır: makineyle polisaj fotoğraflar�
 
 Yerel dosyaların önceki boyut/sıkıştırma kayıtları aşağıda korunur. Lightbox yeni bir büyük dosya kopyası oluşturmaz; aynı statik import'un optimize edilmiş türevini `object-fit: contain` ile gösterir. Fotoğrafın tamamı korunur. Galeri küçük görsellerindeki kırpım `position` alanıyla belirlenir.
 
+## Faz 6 — Hizmet detay fotoğrafları
+
+Kaynak sayfaları ve [Pexels lisansı](https://www.pexels.com/license/) 22 Ekim 2026 tarihinde kontrol edildi. Aşağıdaki gerçek fotoğraflar web kullanımına ve düzenlemeye izin veren Pexels License altında sunulur. Atıf zorunlu değildir; fotoğrafçı kaydı burada korunur. Kişi veya markaların VANTA'yı desteklediği, VANTA'nın bu ürünlerin bayisi olduğu veya fotoğrafların VANTA müşteri işi olduğu iddia edilmez. Sayfalardaki stok fotoğraf notu görünürdür.
+
+| Konu | Kaynak URL | Fotoğrafçı | Lisans | Projedeki dosya |
+| --- | --- | --- | --- | --- |
+| Şeffaf filmin uygulamaya hazırlanması | https://www.pexels.com/photo/men-holding-and-spraying-foil-near-cars-20051463/ | WAVYVISUALS | Pexels License | `frontend/src/assets/images/detail-ppf-preparation.jpg` |
+| Koltuk yüzeyinin bezle temizliği | https://www.pexels.com/photo/a-man-in-black-jacket-cleaning-the-seat-of-a-car-6873185/ | Tima Miroshnichenko | Pexels License | `frontend/src/assets/images/detail-interior-care.jpg` |
+| Boya yüzeyinde polisajla hazırlık | https://www.pexels.com/photo/a-person-polishing-the-white-car-5233279/ | Khunkorn Laowisit | Pexels License | `frontend/src/assets/images/detail-paint-preparation.jpg` |
+
+| Dosya | Orijinal URL | Orijinal çözünürlük | Yerel çözünürlük / boyut |
+| --- | --- | --- | --- |
+| `detail-ppf-preparation.jpg` | https://images.pexels.com/photos/20051463/pexels-photo-20051463.jpeg | 4160 × 2768 | 1600 × 1065 / 181232 bayt |
+| `detail-interior-care.jpg` | https://images.pexels.com/photos/6873185/pexels-photo-6873185.jpeg | 6000 × 4000 | 1600 × 1067 / 101170 bayt |
+| `detail-paint-preparation.jpg` | https://images.pexels.com/photos/5233279/pexels-photo-5233279.jpeg | 4928 × 3264 | 1400 × 927 / 105895 bayt |
+
+Mevcut `sharp` ile yön düzeltme, orantılı küçültme ve kalite 85 JPEG sıkıştırması uygulandı. Kalıcı kırpma veya generatif düzenleme yapılmadı. Gösterim kırpımı hizmetin `detail.hero.position` / `detail.supporting.position` verisi ve CSS ile yönetilir. Yeni bağımlılık veya AI görseli yoktur.
+
+PPF destek fotoğrafı mevcut `gallery-ppf.jpg`, seramik giriş fotoğrafı mevcut `gallery-ceramic.jpg`, detailing destek fotoğrafı mevcut `gallery-care.jpg` dosyasıdır. Kaynakları ve lisansları aşağıdaki Faz 3 tablosundadır; aynı fotoğrafların dosya kopyaları oluşturulmadı. Ana sayfa/katalogdaki üç hizmet fotoğrafı yeni detay girişlerinde tekrarlanmaz. Seramik sayfasındaki beyaz araç fotoğrafı **kaplama uygulaması değil**, ihtiyaç halinde değerlendirilen yüzey hazırlığı örneğidir; caption bunu açıkça belirtir.
+
+Teknik içerik kontrolünde üretici kaynakları: https://www.xpel.com/products/category/paint-protection-film ve https://www.xpel.com/products/automotive-ceramic-coating. Genel film/kaplama ayrımı ve bakım yaklaşımı esas alınır; VANTA için ürün markası, süre, fiyat, sertifika veya garanti taahhüdü çıkarılmaz. Gerçek uygulama talimatı seçilecek ürünün üreticisine bağlıdır.
+
 ## Faz 3 — Uygulama Detayları / GalleryPreview
 
 Bu bölümdeki dört fotoğraf da gerçek uygulama veya hazırlık detaylarını gösterir. AI üretimi, generatif düzenleme ve sahte before/after kullanılmadı. Mevcut hero ve hizmet fotoğrafları tekrar kullanılmaz. PPF ve seramik çekimleri hizmet fotoğraflarıyla aynı seriden, farklı karelerdir; galeri film kenarına, damlaya, polisaj pedine ve fırçayla temizliğe daha yakından bakar.

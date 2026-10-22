@@ -35,6 +35,7 @@ export function Services() {
               <div className="service-copy">
                 <h3 id={`${service.id}-title`}>{service.title}</h3>
                 <p>{service.summary}</p>
+                <Link className="service-detail-link" href={`/hizmetler/${service.slug}`}>{service.title} detayları</Link>
               </div>
             </article>
           ))}
