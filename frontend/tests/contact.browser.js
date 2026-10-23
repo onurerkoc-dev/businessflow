@@ -4,7 +4,7 @@ async (page) => {
   const assert = (condition, message) => {
     if (!condition) throw new Error(message);
   };
-  const destinations = ["/hizmetler/ppf-kaplama", "/hizmetler/seramik-kaplama", "/hizmetler/detailing", "/galeri", "/hizmetler"];
+  const destinations = ["/hizmetler/ppf-kaplama", "/hizmetler/seramik-kaplama", "/hizmetler/detailing", "/galeri", "/teklif-al"];
   const results = [];
   await page.emulateMedia({ reducedMotion: "reduce" });
 
@@ -19,7 +19,7 @@ async (page) => {
     assert(await page.locator("h1").count() === 1 && await page.locator("h1").textContent() === "İletişim", "Unique contact H1");
     assert(await page.locator(".contact-page h2").count() === 3, "Information, service guide and gallery headings");
     assert(await page.locator(".contact-information").textContent().then((value) => value.includes("demo marka") && value.includes("henüz paylaşılmadı")), "Honest contact disclosure");
-    assert(await page.locator(".contact-page form, .contact-page input, .contact-page textarea, .contact-page iframe, .contact-details, a[href='/teklif-al']").count() === 0, "No form, fake map, empty contact records or offer route");
+    assert(await page.locator(".contact-page form, .contact-page input, .contact-page textarea, .contact-page iframe, .contact-details").count() === 0, "No contact form, fake map or empty contact records");
     assert(await page.locator('.contact-page a[href^="tel:"], .contact-page a[href^="mailto:"]').count() === 0, "No invented contact channels");
     assert(await page.locator(".contact-services li").count() === 3, "Three service destinations");
     const hrefs = await page.locator(".contact-page a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));

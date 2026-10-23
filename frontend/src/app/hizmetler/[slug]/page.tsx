@@ -51,7 +51,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="detail-lead">
             <h1>{service.title}</h1>
             <p>{detail.introduction}</p>
-            <Link className="detail-text-link" href="/galeri">Uygulama Galerisi</Link>
+            <div className="detail-lead-actions">
+              <Link className="button button-primary" href={`/teklif-al?hizmet=${service.slug}`}>Teklif Al</Link>
+              <Link className="detail-text-link" href="/galeri">Uygulama Galerisi</Link>
+            </div>
           </div>
           <figure>
             <div className="detail-hero-media">

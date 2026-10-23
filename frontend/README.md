@@ -1,6 +1,6 @@
 # BusinessFlow — Premium frontend redesign
 
-Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda`, `/iletisim` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 8'de bağımsız İletişim sayfası ve header/footer bağlantıları eklendi. Ana sayfanın hero'su, galeri etkileşimleri ve Hakkımızda sayfasının ortalanmış fotoğrafı korunur. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihseldir; güncel uygulama notları Faz 8 bölümündedir.
+Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda`, `/iletisim`, `/teklif-al` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 9'da yalnızca tarayıcı içinde doğrulama ve bilgi özeti sunan teklif formu eklendi. Header, footer, ana sayfa, iletişim ve hizmet detayları bu sayfaya yönlendirir. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihseldir; güncel uygulama notları Faz 9 bölümündedir.
 
 **VANTA geçici proje markasıdır.** Demo niteliği Hakkımızda, İletişim ve footer'da kısa biçimde açıklanır. Uydurma adres, telefon, e-posta, çalışma saati, müşteri yorumu, sertifika, garanti veya geçmiş proje iddiası yoktur. `robots` ayarı indekslemeyi engeller.
 
@@ -470,3 +470,72 @@ npm run start -- --port 3012
 ```
 
 Sunucu zaten çalışıyorsa mevcut adresi açın. Gerçek iletişim kanalları ve onaylı işletme çekimleri henüz yoktur. Form ve `/teklif-al` geliştirilmedi. Gerçek cihaz, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. Backend, MySQL, Spring Security, Flyway, Docker, admin ve Git işlemi yapılmadı.
+
+## Faz 9 — Teklif talep formu
+
+### Dosyalar ve component sınırları
+
+Yeni dosyalar:
+
+- `src/app/teklif-al/page.tsx`: Server Component route; özgün metadata, tek H1, giriş metni ve Suspense içindeki async hizmet seçimi.
+- `src/components/quote-request-form.tsx`: Form alanları, doğrulama etkileşimi, bilgi özeti ve düzenlemeye dönüş için Client Component.
+- `src/lib/quote-request.ts`: Açık DTO alan isimleriyle form tipi, hata tipi, hizmet seçeneği tipi, telefon normalizasyonu ve saf doğrulama fonksiyonu.
+- `tests/quote-validation.test.mjs`: Node'un yerleşik test araçlarıyla dört doğrulama testi.
+- `tests/quote-request.browser.js`: Playwright MCP üzerinden form, query, gizlilik, erişilebilirlik ve responsive kontrolleri.
+
+Değişen mevcut dosyalar: `src/app/globals.css`, `src/components/navigation-links.tsx`, `src/components/footer.tsx`, `src/components/hero.tsx`, `src/app/iletisim/page.tsx`, `src/app/hizmetler/[slug]/page.tsx`; yeni navigasyona uyarlanan `tests/services.browser.js`, `tests/contact.browser.js`, `tests/about-footer.browser.js`; bu README ve `src/assets/images/SOURCES.md`.
+
+### Server / Client ve query akışı
+
+Sayfa metadata'sı, başlık ve açıklama sunucuda render edilir. `QuoteFormSection`, Next.js 16'nın Promise olan `searchParams` prop'unu `await` eder. Yalnızca `services.ts` içinde bulunan tek bir `hizmet` slug'ı kabul edilir. Tanınmayan, boş veya tekrarlanan hizmet değerleri seçimsiz form ve kısa açıklama üretir; diğer query anahtarları yok sayılır. Client tarafında URL parsing yapılmaz.
+
+Forma yalnızca `{ slug, title }` seçenekleri, başlangıç slug'ı ve geçersiz seçim bilgisi geçilir. Hizmet fotoğrafları/ayrıntıları client prop'una eklenmez. Seçenekler mevcut `services` kaynağından türetilir; ayrı kopya katalog yoktur. `Suspense`, mevcut `cacheComponents` yapılandırmasında request'e bağlı query okumasını kapsar. Build, `/teklif-al` için statik kabuk ve dinamik form alanı içeren PPR çıktısı üretir. Global noindex korunur.
+
+### State, doğrulama ve veri güvenliği
+
+React `useState`, alanları (`values`), alan hatalarını (`errors`) ve doğrulanmış özeti (`review`) tutar. Ayrı state kütüphanesi yoktur. Düzenlemeye dönüş alanları korur; özet başlığına ve dönüşte ilk alana odak verilir. `useRef` DOM odağını yönetir.
+
+Zorunlu ad/telefon/marka/model/hizmet, isteğe bağlı e-posta ve dört haneli 1900–geçerli yıl+1 model yılı kontrol edilir. Mesaj sınırı 1000 karakterdir; hem HTML `maxLength` hem doğrulama fonksiyonu uygular. Boşluk, parantez ve tire içeren yaygın `0`, `+90`, `0090` telefon biçimleri kabul edilir; özet Türkiye cep numarasını `+90` biçiminde gösterir. Format kontrolü numaranın sahipliğini veya aktif olduğunu doğrulamaz. Model yılı form state'inde string kalır; gelecekte DTO dönüşümü gönderim sınırında yapılmalıdır.
+
+Hatalar alan altında, `aria-invalid` ve `aria-describedby` ile ilişkilidir. Hatalı kontrolde ilk geçersiz alan odaklanır; kullanıcı düzeltirken hatalar güncellenir. Native label, fieldset/legend, uygun input type/inputMode, görünür focus ve durum duyurusu bulunur.
+
+**Gerçek gönderim yoktur.** Submit yalnızca `preventDefault` ile yerel doğrulama ve okunabilir özet üretir. Özet açıkça “Teklif gönderimi henüz aktif değil. Bilgileriniz kaydedilmedi veya gönderilmedi.” der. API endpoint'i, fetch, Server Action, sahte başarı/numara, localStorage, sessionStorage veya kişisel veri log'u eklenmedi. Bilgiler yalnızca component belleğindedir. Kontrollerde `name` bulunmaz; native form serileştirmesi kişisel alanları taşımaz. `useSyncExternalStore` ile server/hydration öncesi kontroller disabled tutulur; JavaScript kapalıysa açıklama görünür. Bu aşamada sahte KVKK onayı veya olmayan politika bağlantısı yoktur.
+
+### Tasarım ve eski düzeltmeler
+
+VANTA grafit/kırık beyaz/bakır token'ları ve mevcut fontlar kullanılır. Form için yalnızca açık zeminde okunabilen hata token'ı eklendi. Tailwind CSS 4'ün mevcut `@layer components` düzeninde `quote-` sınıfları kullanılır; form framework'ü yoktur. Desktop iki sütun; 1024 px altında tek ana sütun; 768 px altında alanlar da tek sütundur. Mobilde butonlar tam genişliktedir. Alanlar en az 48 px yüksekliğinde; metin alanı dikey büyütülebilir ve uzun özet metinleri satır kırar.
+
+Header ana CTA'sı Teklif Al oldu; hizmet bağlantıları korunur. Aktif CTA'nın eski koyu arka plan kuralı açık butonla çakıştığı için kaldırıldı ve kontrast testine eklendi. Hero'nun ana CTA'sı teklif, ikinci CTA'sı hizmetlerdir. Üç detay sayfası kendi slug'ıyla ön seçim sağlar. Footer ve İletişim sayfasında çalışan teklif bağlantıları bulunur.
+
+İletişim fotoğrafı masaüstünde hizmet rehberini kapsayacak şekilde uzamaz; 4:3 oranında üst iki içerik satırına hizalanır. Hizmet rehberi altta üç sütundur. Tablet 3:2 ve mobil 4:5 oranı ekipman odağıyla korunur. Caption 14 px oldu. Yeni fotoğraf yoktur; kaynak belgesine kadraj notu eklendi. Hakkımızda sayfası, galeri etkileşimleri, mobil menü ve hizmet veri dosyasının SHA-256 değerleri çalışma öncesiyle aynıdır. Galeri H1 ölçeği ve Hakkımızda fotoğraf hizası regresyon testinde doğrulandı.
+
+### Doğrulama ve tekrar çalıştırma
+
+`frontend` dizininde sırayla:
+
+```powershell
+npm run lint
+node --experimental-strip-types --test tests/quote-validation.test.mjs
+npm run build
+npx --no-install tsc --noEmit
+npm run start -- --port 3013
+```
+
+Geliştirme için `npm run dev` kullanılabilir. Çalışan son production önizlemesi: `http://127.0.0.1:3013/teklif-al`. Hizmet ön seçimi örneği: `/teklif-al?hizmet=ppf-kaplama`.
+
+Gerçekten çalıştırılan sonuçlar:
+
+- ESLint, production build ve build sonrasındaki TypeScript kontrolü başarılı. Yeni/güncellenmiş test dosyalarının ESLint kontrolü de geçti.
+- Node doğrulama testleri: 4 başarılı, 0 başarısız. Node, doğrudan `.ts` import'unda paket `type` alanı bulunmadığı için `MODULE_TYPELESS_PACKAGE_JSON` uyarısı verdi; testler geçti, mevcut paket yapılandırması değiştirilmedi.
+- `quote-request.browser.js` geçti: boş/zorunlu alanlar, yanlış telefon/e-posta/yıl, 1000/1001 karakter sınırı, düzeltme, özet, telefon normalizasyonu, düzenlemeye dönüş ve odak; tüm hizmet ön seçimleri, tanınmayan/tekrarlanan query değerleri, giriş CTA'ları, noindex ve JavaScript kapalı durum.
+- Kurgu test verileriyle kontrol/özet/düzenleme akışındaki ağ istekleri incelendi: kişisel test değerleri URL, body veya header'larda gönderilmedi; GET/HEAD dışında istek yoktu. Konsola test değeri yazılmadı; localStorage/sessionStorage/cookie değişmedi. Native FormData boş kaldı; sahte başarı mesajı yoktu.
+- 1440, 1280, 1024, 768, 390 ve 375 px genişliklerde normal/hata/özet düzeni, labels, en az 44 px hedefler, input türleri, Tab/focus, renk kontrastı, footer geçişi ve yatay taşma kontrolleri geçti. Ekran görüntüleri %100 zoom ile incelendi; iletişim fotoğrafı kadrajları ve caption da altı genişlikte değerlendirildi.
+- Mevcut `services.browser.js`, `gallery.browser.js`, `service-details.browser.js`, `contact.browser.js`, `about-footer.browser.js` regresyonları geçti. Filtre/lightbox, FAQ, geçersiz hizmet 404, menü ve bağlantılar çalışıyor. Son CSS düzeltmelerinden sonra quote ve dokuz route × altı genişlikte about/footer testleri tekrar geçti; 1280/1024 px header sıkışmıyor.
+
+Tarayıcı dosyaları mevcut Playwright MCP'de `browser_run_code_unsafe` aracına `filename: "frontend/tests/quote-request.browser.js"` (veya diğer test yolu) verilerek çalışır. Sekme uygulamanın origin'inde açık olmalıdır; bu dosyalar bağımsız CLI test runner'ı değildir. Yeni bağımlılık kurulmadı. Geçici ekran görüntüleri `.next/qa/phase9` içindedir; build sırasında kaybolabilir.
+
+Gerçek cihaz/ekran klavyesi, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. Backend, MySQL, Flyway, Docker, admin ve Git işlemi yapılmadı.
+
+### Spring Boot için kalan işler
+
+Gerçek Quote Request DTO/endpoint'i, sunucu doğrulaması ve telefon normalizasyonu, hata/başarı sözleşmesi, güvenli gönderim ve talep saklama akışı henüz yoktur. Gerçek gönderim açılmadan önce doğrulanmış aydınlatma metni, saklama politikası ve veri işleme akışı hazırlanmalı; ardından frontend gönderim/yüklenme/hata durumları gerçek API'ye bağlanmalıdır. Bu aşamada API client veya geçici backend eklenmedi.
