@@ -26,6 +26,9 @@ export function MobileMenu({ children }: { children: ReactNode }) {
     <details
       className="mobile-menu"
       ref={menuRef}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
+      }}
       onKeyDown={(event) => {
         if (event.key === "Escape" && event.currentTarget.open) {
           event.preventDefault();

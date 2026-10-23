@@ -9,6 +9,7 @@ type QuotePageProps = {
 };
 
 const description = "Aracınızın bilgilerini ve ilgilendiğiniz hizmeti paylaşarak teklif talebinizi hazırlayın.";
+const serviceOptions = services.map(({ slug, title }) => ({ slug, title }));
 
 export const metadata: Metadata = {
   title: "Teklif Al | VANTA",
@@ -23,7 +24,7 @@ async function QuoteFormSection({ searchParams }: QuotePageProps) {
   return (
     <QuoteRequestForm
       key={`${selectedService?.slug ?? "none"}-${invalidService}`}
-      services={services.map(({ slug, title }) => ({ slug, title }))}
+      services={serviceOptions}
       initialServiceSlug={selectedService?.slug ?? ""}
       invalidInitialService={invalidService}
     />
@@ -44,7 +45,7 @@ export default function QuotePage({ searchParams }: QuotePageProps) {
             <Link href="/iletisim">İletişim</Link>
           </nav>
         </header>
-        <Suspense fallback={<p className="quote-panel" role="status">Form hazırlanıyor…</p>}>
+        <Suspense fallback={<QuoteRequestForm services={serviceOptions} initialServiceSlug="" invalidInitialService={false} pending />}>
           <QuoteFormSection searchParams={searchParams} />
         </Suspense>
       </div>

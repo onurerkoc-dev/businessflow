@@ -1,0 +1,1341 @@
+{
+  "date": "2026-10-24",
+  "engine": "Chromium 155.0.8059.85",
+  "method": {
+    "server": "Next.js production on 127.0.0.1:3015",
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "dpr": 1
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "dpr": 2
+    },
+    "coldBrowserContexts": true,
+    "networkAndCpuThrottling": false,
+    "includesViewportPrefetch": true,
+    "lighthouse": false,
+    "fieldData": false,
+    "inpMeasured": false,
+    "window": "networkidle + 350 ms, no scrolling/interactions"
+  },
+  "before": [
+    {
+      "profile": "desktop",
+      "route": "/",
+      "ttfb": 9,
+      "fcp": 176,
+      "lcp": 176,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/detailing-hero.ca221912.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 200894,
+      "scripts": 12,
+      "images": 4,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 15
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler",
+      "ttfb": 6,
+      "fcp": 124,
+      "lcp": 164,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/service-ppf.7ba95b97.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 162104,
+      "scripts": 12,
+      "images": 3,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 6
+        }
+      ],
+      "eagerImages": 0,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler/ppf-kaplama",
+      "ttfb": 6,
+      "fcp": 116,
+      "lcp": 116,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/detail-ppf-preparation.7e668aa7.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 70444,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 12
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler/seramik-kaplama",
+      "ttfb": 7,
+      "fcp": 132,
+      "lcp": 132,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/gallery-ceramic.a8392e76.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 44882,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 19
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler/detailing",
+      "ttfb": 7,
+      "fcp": 128,
+      "lcp": 128,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/detail-interior-care.605819e5.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 29614,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 10
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/galeri",
+      "ttfb": 8,
+      "fcp": 116,
+      "lcp": 180,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/gallery-ceramic.a8392e76.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 170154,
+      "scripts": 12,
+      "images": 8,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 11
+        }
+      ],
+      "eagerImages": 0,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hakkimizda",
+      "ttfb": 7,
+      "fcp": 120,
+      "lcp": 120,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/about-surface-care.3f6848e3.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 140364,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 17
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/iletisim",
+      "ttfb": 6,
+      "fcp": 124,
+      "lcp": 124,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/contact-detailing-tools.a3f36f2d.jpg",
+      "cls": 0,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 44598,
+      "scripts": 12,
+      "images": 1,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 9
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/teklif-al",
+      "ttfb": 7,
+      "fcp": 124,
+      "lcp": 124,
+      "lcpTag": "H1",
+      "lcpImage": "",
+      "cls": 0.1918,
+      "scriptBytes": 157093,
+      "cssBytes": 7854,
+      "imageBytes": 0,
+      "scripts": 13,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 34
+        }
+      ],
+      "eagerImages": 0,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/",
+      "ttfb": 8,
+      "fcp": 144,
+      "lcp": 248,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/detailing-hero-mobile.f0603ca2.jpg",
+      "cls": 0,
+      "scriptBytes": 149321,
+      "cssBytes": 7854,
+      "imageBytes": 174710,
+      "scripts": 8,
+      "images": 3,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 10
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler",
+      "ttfb": 6,
+      "fcp": 92,
+      "lcp": 128,
+      "lcpTag": "IMG",
+      "lcpImage": null,
+      "cls": 0,
+      "scriptBytes": 146561,
+      "cssBytes": 7854,
+      "imageBytes": 186588,
+      "scripts": 8,
+      "images": 3,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 8
+        }
+      ],
+      "eagerImages": 0,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler/ppf-kaplama",
+      "ttfb": 7,
+      "fcp": 120,
+      "lcp": 120,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/detail-ppf-preparation.7e668aa7.jpg",
+      "cls": 0,
+      "scriptBytes": 153529,
+      "cssBytes": 7854,
+      "imageBytes": 89564,
+      "scripts": 10,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 11
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler/seramik-kaplama",
+      "ttfb": 8,
+      "fcp": 136,
+      "lcp": 136,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/gallery-ceramic.a8392e76.jpg",
+      "cls": 0,
+      "scriptBytes": 153529,
+      "cssBytes": 7854,
+      "imageBytes": 55774,
+      "scripts": 10,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 13
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler/detailing",
+      "ttfb": 8,
+      "fcp": 128,
+      "lcp": 128,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/detail-interior-care.605819e5.jpg",
+      "cls": 0,
+      "scriptBytes": 153529,
+      "cssBytes": 7854,
+      "imageBytes": 36328,
+      "scripts": 10,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 9
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/galeri",
+      "ttfb": 7,
+      "fcp": 128,
+      "lcp": 156,
+      "lcpTag": "IMG",
+      "lcpImage": null,
+      "cls": 0,
+      "scriptBytes": 147971,
+      "cssBytes": 7854,
+      "imageBytes": 115828,
+      "scripts": 8,
+      "images": 4,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 7
+        }
+      ],
+      "eagerImages": 0,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hakkimizda",
+      "ttfb": 6,
+      "fcp": 144,
+      "lcp": 144,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/about-surface-care.3f6848e3.jpg",
+      "cls": 0,
+      "scriptBytes": 145866,
+      "cssBytes": 7854,
+      "imageBytes": 19978,
+      "scripts": 8,
+      "images": 1,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 8
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/iletisim",
+      "ttfb": 5,
+      "fcp": 144,
+      "lcp": 144,
+      "lcpTag": "IMG",
+      "lcpImage": "/_next/static/media/contact-detailing-tools.a3f36f2d.jpg",
+      "cls": 0,
+      "scriptBytes": 146623,
+      "cssBytes": 7854,
+      "imageBytes": 54520,
+      "scripts": 8,
+      "images": 1,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 12
+        }
+      ],
+      "eagerImages": 1,
+      "logs": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/teklif-al",
+      "ttfb": 8,
+      "fcp": 144,
+      "lcp": 144,
+      "lcpTag": "P",
+      "lcpImage": "",
+      "cls": 0.3621,
+      "scriptBytes": 155694,
+      "cssBytes": 7854,
+      "imageBytes": 0,
+      "scripts": 12,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 24
+        }
+      ],
+      "eagerImages": 0,
+      "logs": []
+    }
+  ],
+  "after": [
+    {
+      "profile": "desktop",
+      "route": "/",
+      "ttfb": 8,
+      "fcp": 252,
+      "lcp": 552,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 200894,
+      "scripts": 12,
+      "images": 4,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 122
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler",
+      "ttfb": 8,
+      "fcp": 128,
+      "lcp": 168,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 162104,
+      "scripts": 12,
+      "images": 3,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 8
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler/ppf-kaplama",
+      "ttfb": 7,
+      "fcp": 120,
+      "lcp": 120,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 70444,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 12
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler/seramik-kaplama",
+      "ttfb": 7,
+      "fcp": 136,
+      "lcp": 136,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 44882,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 13
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hizmetler/detailing",
+      "ttfb": 7,
+      "fcp": 148,
+      "lcp": 148,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 29614,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 13
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/galeri",
+      "ttfb": 7,
+      "fcp": 152,
+      "lcp": 192,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 170154,
+      "scripts": 12,
+      "images": 8,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 19
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/hakkimizda",
+      "ttfb": 6,
+      "fcp": 132,
+      "lcp": 132,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 140364,
+      "scripts": 12,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 10
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/iletisim",
+      "ttfb": 6,
+      "fcp": 120,
+      "lcp": 120,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 155767,
+      "cssBytes": 7851,
+      "imageBytes": 44598,
+      "scripts": 12,
+      "images": 1,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 9
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/teklif-al",
+      "ttfb": 8,
+      "fcp": 152,
+      "lcp": 152,
+      "lcpTag": "H1",
+      "cls": 0,
+      "scriptBytes": 157166,
+      "cssBytes": 7851,
+      "imageBytes": 0,
+      "scripts": 13,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 30
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/teklif-al",
+      "ttfb": 7,
+      "fcp": 172,
+      "lcp": 172,
+      "lcpTag": "H1",
+      "cls": 0,
+      "scriptBytes": 157166,
+      "cssBytes": 7851,
+      "imageBytes": 0,
+      "scripts": 13,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 57
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "desktop",
+      "route": "/teklif-al?hizmet=unknown",
+      "ttfb": 7,
+      "fcp": 136,
+      "lcp": 136,
+      "lcpTag": "H1",
+      "cls": 0,
+      "scriptBytes": 157166,
+      "cssBytes": 7851,
+      "imageBytes": 0,
+      "scripts": 13,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 26
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/",
+      "ttfb": 8,
+      "fcp": 128,
+      "lcp": 128,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 149394,
+      "cssBytes": 7851,
+      "imageBytes": 174710,
+      "scripts": 8,
+      "images": 3,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 9
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler",
+      "ttfb": 6,
+      "fcp": 132,
+      "lcp": 152,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 146584,
+      "cssBytes": 7851,
+      "imageBytes": 186588,
+      "scripts": 8,
+      "images": 3,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 10
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler/ppf-kaplama",
+      "ttfb": 6,
+      "fcp": 148,
+      "lcp": 148,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 153602,
+      "cssBytes": 7851,
+      "imageBytes": 89564,
+      "scripts": 10,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 7
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler/seramik-kaplama",
+      "ttfb": 7,
+      "fcp": 112,
+      "lcp": 112,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 153602,
+      "cssBytes": 7851,
+      "imageBytes": 55774,
+      "scripts": 10,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 10
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hizmetler/detailing",
+      "ttfb": 8,
+      "fcp": 132,
+      "lcp": 132,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 153602,
+      "cssBytes": 7851,
+      "imageBytes": 36328,
+      "scripts": 10,
+      "images": 2,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 23
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/galeri",
+      "ttfb": 7,
+      "fcp": 120,
+      "lcp": 152,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 147994,
+      "cssBytes": 7851,
+      "imageBytes": 115828,
+      "scripts": 8,
+      "images": 4,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 8
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/hakkimizda",
+      "ttfb": 6,
+      "fcp": 132,
+      "lcp": 132,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 145889,
+      "cssBytes": 7851,
+      "imageBytes": 19978,
+      "scripts": 8,
+      "images": 1,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 8
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/iletisim",
+      "ttfb": 5,
+      "fcp": 108,
+      "lcp": 108,
+      "lcpTag": "IMG",
+      "cls": 0,
+      "scriptBytes": 146646,
+      "cssBytes": 7851,
+      "imageBytes": 54520,
+      "scripts": 8,
+      "images": 1,
+      "longTasks": 0,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 10
+        }
+      ],
+      "eagerImages": 1,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/teklif-al",
+      "ttfb": 8,
+      "fcp": 136,
+      "lcp": 136,
+      "lcpTag": "P",
+      "cls": 0,
+      "scriptBytes": 152254,
+      "cssBytes": 7851,
+      "imageBytes": 0,
+      "scripts": 10,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 24
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/teklif-al",
+      "ttfb": 7,
+      "fcp": 112,
+      "lcp": 112,
+      "lcpTag": "P",
+      "cls": 0,
+      "scriptBytes": 152254,
+      "cssBytes": 7851,
+      "imageBytes": 0,
+      "scripts": 10,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 22
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    },
+    {
+      "profile": "mobile",
+      "route": "/teklif-al?hizmet=unknown",
+      "ttfb": 10,
+      "fcp": 144,
+      "lcp": 144,
+      "lcpTag": "P",
+      "cls": 0,
+      "scriptBytes": 152254,
+      "cssBytes": 7851,
+      "imageBytes": 0,
+      "scripts": 10,
+      "images": 0,
+      "longTasks": 1,
+      "renderBlocking": [
+        {
+          "type": "link",
+          "duration": 32
+        }
+      ],
+      "eagerImages": 0,
+      "warnings": []
+    }
+  ],
+  "quality": {
+    "engine": "155.0.8059.85",
+    "routeWidths": 81,
+    "widths": [
+      1920,
+      1440,
+      1280,
+      1024,
+      768,
+      430,
+      390,
+      375,
+      320
+    ],
+    "axeChecks": 24,
+    "axeViolations": 0,
+    "axeIncomplete": [
+      {
+        "label": "/ 1440px",
+        "version": "4.14.0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "label": "/ 390px",
+        "version": "4.14.0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "heroContrast": [
+      {
+        "width": 1920,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 7.67,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 7.03,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 10.4,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 13.81,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 7.86,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 6.32,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 11.16,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 14.47,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 1280,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 6.61,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 5.92,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 9.98,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 14.63,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 1024,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 8.2,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 6.26,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 6.69,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 11.11,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 11.34,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 6.97,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 7.59,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 12.99,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 430,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 7.64,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 7.88,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 9.86,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 14.34,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 390,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 7.64,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 8.12,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 9.86,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 14.82,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 7.65,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 8.13,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 9.86,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 15.59,
+            "required": 4.5
+          }
+        ]
+      },
+      {
+        "width": 320,
+        "contrasts": [
+          {
+            "selector": "hero-category",
+            "minimum": 5.77,
+            "required": 4.5
+          },
+          {
+            "selector": "H1",
+            "minimum": 7.64,
+            "required": 3
+          },
+          {
+            "selector": "hero-description",
+            "minimum": 8.23,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-primary",
+            "minimum": 15.56,
+            "required": 4.5
+          },
+          {
+            "selector": "button button-outline",
+            "minimum": 14.52,
+            "required": 4.5
+          }
+        ]
+      }
+    ],
+    "keyboardMenuExit": true,
+    "shortLightbox": true,
+    "longSummary": true,
+    "reducedViewportChecks": 27,
+    "actualBrowserZoomTested": false,
+    "consoleWarnings": 0,
+    "routes": [
+      {
+        "route": "/",
+        "title": "VANTA | PPF Kaplama, Seramik Kaplama ve Detailing",
+        "description": "PPF kaplama, seramik kaplama ve detaylı araç bakımı. Aracınıza uygun uygulamayı keşfedin.",
+        "captionMin": 15
+      },
+      {
+        "route": "/hizmetler",
+        "title": "Hizmetler | PPF Kaplama, Seramik Kaplama ve Detailing | VANTA",
+        "description": "PPF kaplama, seramik kaplama ve iç/dış araç bakımı uygulamalarını inceleyin.",
+        "captionMin": null
+      },
+      {
+        "route": "/hizmetler/ppf-kaplama",
+        "title": "PPF Kaplama | VANTA",
+        "description": "PPF kaplamanın fiziksel koruma işlevini, yüzey hazırlığını ve uygulama adımlarını inceleyin.",
+        "captionMin": 14
+      },
+      {
+        "route": "/hizmetler/seramik-kaplama",
+        "title": "Seramik Kaplama | VANTA",
+        "description": "Seramik kaplamanın yüzey bakımı, su iticiliği ve temizlik kolaylığı açısından ne sağladığını ve uygulama hazırlığını inceleyin.",
+        "captionMin": 14
+      },
+      {
+        "route": "/hizmetler/detailing",
+        "title": "Detailing | VANTA",
+        "description": "İç ve dış araç detailing bakımını, yüzeye göre temizlik yaklaşımını ve boya bakımının kapsamını inceleyin.",
+        "captionMin": 14
+      },
+      {
+        "route": "/galeri",
+        "title": "Uygulama Galerisi | VANTA",
+        "description": "PPF, seramik kaplama, boya düzeltme ve detaylı araç bakımı uygulamalarını yakından inceleyin.",
+        "captionMin": 14
+      },
+      {
+        "route": "/hakkimizda",
+        "title": "Hakkımızda | VANTA",
+        "description": "VANTA'nın PPF, seramik kaplama ve detailing için yüzey değerlendirmesi, uygulama hazırlığı ve doğru bakıma odaklanan yaklaşımını tanıyın.",
+        "captionMin": 14
+      },
+      {
+        "route": "/iletisim",
+        "title": "İletişim | VANTA",
+        "description": "PPF, seramik kaplama ve detailing hakkında bilgi edinin. VANTA'nın hizmet kapsamlarını ve uygulama detaylarını inceleyin.",
+        "captionMin": 14
+      },
+      {
+        "route": "/teklif-al",
+        "title": "Teklif Al | VANTA",
+        "description": "Aracınızın bilgilerini ve ilgilendiğiniz hizmeti paylaşarak teklif talebinizi hazırlayın.",
+        "captionMin": null
+      }
+    ]
+  }
+}

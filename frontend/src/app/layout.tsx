@@ -3,10 +3,13 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 
+const title = "VANTA | PPF Kaplama, Seramik Kaplama ve Detailing";
+const description = "PPF kaplama, seramik kaplama ve detaylı araç bakımı. Aracınıza uygun uygulamayı keşfedin.";
+
 export const metadata: Metadata = {
-  title: "VANTA | PPF Kaplama, Seramik Kaplama ve Detailing",
-  description:
-    "PPF kaplama, seramik kaplama ve detaylı araç bakımı. Aracınıza uygun uygulamayı keşfedin.",
+  title,
+  description,
+  openGraph: { title, description, type: "website", locale: "tr_TR", siteName: "VANTA" },
   robots: { index: false, follow: false },
 };
 

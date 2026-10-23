@@ -5,10 +5,12 @@ import { services } from "@/data/services";
 
 const description =
   "PPF kaplama, seramik kaplama ve iç/dış araç bakımı uygulamalarını inceleyin.";
+const title = "Hizmetler | PPF Kaplama, Seramik Kaplama ve Detailing | VANTA";
 
 export const metadata: Metadata = {
-  title: "Hizmetler | PPF Kaplama, Seramik Kaplama ve Detailing | VANTA",
+  title,
   description,
+  openGraph: { title, description, type: "website", locale: "tr_TR", siteName: "VANTA" },
 };
 
 export default function ServicesPage() {

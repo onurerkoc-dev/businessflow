@@ -1,6 +1,6 @@
 # BusinessFlow — Premium frontend redesign
 
-Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda`, `/iletisim`, `/teklif-al` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 9'da yalnızca tarayıcı içinde doğrulama ve bilgi özeti sunan teklif formu eklendi. Header, footer, ana sayfa, iletişim ve hizmet detayları bu sayfaya yönlendirir. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihseldir; güncel uygulama notları Faz 9 bölümündedir.
+Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda`, `/iletisim`, `/teklif-al` ve üç bağımsız hizmet detay sayfasından oluşur. Teklif formu yalnızca tarayıcı içinde doğrulama ve bilgi özeti sunar. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihseldir; son kalite sonuçları Faz 10 bölümünde ve [ayrıntılı denetim raporunda](docs/PHASE10_AUDIT.md) bulunur.
 
 **VANTA geçici proje markasıdır.** Demo niteliği Hakkımızda, İletişim ve footer'da kısa biçimde açıklanır. Uydurma adres, telefon, e-posta, çalışma saati, müşteri yorumu, sertifika, garanti veya geçmiş proje iddiası yoktur. `robots` ayarı indekslemeyi engeller.
 
@@ -539,3 +539,31 @@ Gerçek cihaz/ekran klavyesi, Safari/Firefox, ekran okuyucu ve saha performansı
 ### Spring Boot için kalan işler
 
 Gerçek Quote Request DTO/endpoint'i, sunucu doğrulaması ve telefon normalizasyonu, hata/başarı sözleşmesi, güvenli gönderim ve talep saklama akışı henüz yoktur. Gerçek gönderim açılmadan önce doğrulanmış aydınlatma metni, saklama politikası ve veri işleme akışı hazırlanmalı; ardından frontend gönderim/yüklenme/hata durumları gerçek API'ye bağlanmalıdır. Bu aşamada API client veya geçici backend eklenmedi.
+
+## Faz 10 — Son frontend kalite denetimi
+
+24 Ekim 2026 tarihinde dokuz route, ortak bileşenler, kaynak kayıtları ve mevcut testler incelendi. Ayrıntılı sayfa bulguları, P0/P1/P2/P3 listesi, değişen dosyalar, test kapsamı, performans tablosu ve eksikler [PHASE10_AUDIT.md](docs/PHASE10_AUDIT.md) içindedir. [Ham ölçümler](docs/phase10/measurements.json), [menü odak karşılaştırması](docs/phase10/menu-focus-comparison.png) ve [hero kontrast karşılaştırması](docs/phase10/hero-contrast-comparison.png) kaydedildi.
+
+- P1 mobil menü odak örtülmesi giderildi: odak menüden çıktığında menü kapanır.
+- Teklif sayfasının kısa Suspense mesajından tam forma geçişinde footer kayıyordu. Aynı yerleşime sahip disabled/aria-busy form fallback'i ve ayrı yükleme ID'leri kullanıldı. Yerel başlangıç CLS desktop 0,1918 / mobile 0,3621 iken son altı teklif yüklemesinde 0 ölçüldü.
+- Mevcut form sürümünde message/service hint referansları zaten doğruydu. Yanıltıcı string parametreleri boolean hale getirildi; normal/query/hata durumlarında ID eşleşme testleri eklendi.
+- Mobil hero kategori satırı 12 px oldu; maske güçlendirildi. 320 px arka plan örneklemesinde kontrast 2,51:1 → 5,77:1. Fotoğraf değişmedi.
+- Küçük fotoğraf açıklamaları ortak 14 px token'a taşındı. Ana sayfa/kataloğa Open Graph metinleri eklendi. Global noindex ve domain/canonical eksikliği demo için korundu.
+- Son ESLint, test ESLint'i, TypeScript ve production build başarılı; Node doğrulama testleri 4/4. İlk build EPERM izin hatasından sonra gerekli erişimle tekrar çalıştırıldı. Node'un mevcut modül türü uyarısı raporda kayıtlıdır.
+- Altı mevcut tarayıcı regresyonu geçti. Yeni `quality-audit.browser.js`: dokuz route × dokuz genişlik (1920, 1440, 1280, 1024, 768, 430, 390, 375, 320), 24 axe kontrolünde 0 otomatik ihlal, menü/kontrast/kısa lightbox/uzun özet kontrolleri ve 27 daraltılmış viewport kontrolü geçti. Fotoğraf üzerindeki metinlerin axe kararsız sonuçları ayrı piksel örneklemesiyle değerlendirildi; bu tam WCAG uygunluğu iddiası değildir.
+- Yeni `performance.browser.js`, 22 yerel production yüklemesinde PerformanceObserver/Resource Timing verisi toplar ve teklif CLS regresyonunu kontrol eder. Lighthouse/Chrome DevTools MCP mevcut değildir; Lighthouse puanı veya saha performansı iddiası yoktur.
+
+Çalıştırma (`frontend` dizininde, build ile TypeScript'i aynı anda çalıştırmadan):
+
+```powershell
+npm run lint
+npx --no-install eslint tests
+node --experimental-strip-types --test tests/quote-validation.test.mjs
+npm run build
+npx --no-install tsc --noEmit
+npm run start -- --port 3015
+```
+
+Mevcut Playwright MCP'de çalışan uygulama sekmesi `http://127.0.0.1:3015` origin'inde açıkken `browser_run_code_unsafe` aracına `filename: "frontend/tests/quality-audit.browser.js"` veya `filename: "frontend/tests/performance.browser.js"` verilir. Altı mevcut `.browser.js` dosyası da aynı yöntemle çalışır. Bunlar bağımsız CLI runner değildir; axe-core mevcut transitif kurulumdan kullanılır, site bundle'ına eklenmez.
+
+Gerçek browser %200 zoom bu ortamın kısayoluyla değişmedi; gerçek zoom testi yapılmış sayılmadı. 960×540, 640×450 ve 512×384 CSS viewport'ları ayrıca test edildi. Firefox/WebKit, gerçek cihaz, ekran okuyucu, Lighthouse, RUM ve INP test edilmedi. Backend/API, veri saklama ve admin entegrasyonu yapılmadı; form gerçek gönderim yapmaz. Yeni dependency veya Git işlemi yoktur.
