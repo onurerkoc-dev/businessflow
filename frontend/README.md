@@ -1,6 +1,6 @@
 # BusinessFlow — Premium frontend redesign
 
-Frontend; ana sayfa, `/galeri`, `/hizmetler` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 6'da ortak dinamik route, hizmete özel içerik/fotoğraflar ve gerçek detay bağlantıları eklendi. Ana sayfanın hero'su ve galeri etkileşimleri korunur. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihsel doğrulamalardır; güncel uygulama notları Faz 6 bölümündedir.
+Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 7'de Hakkımızda sayfası ve bütün mevcut public sayfalarda gösterilen ortak footer eklendi. Ana sayfanın hero'su ve galeri etkileşimleri korunur. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihsel doğrulamalardır; güncel uygulama notları Faz 7 bölümündedir.
 
 **VANTA geçici proje markasıdır.** Kullanıcı arayüzünde demo etiketleri gösterilmez; gerçek bir adres, telefon, müşteri yorumu, sertifika, garanti veya geçmiş proje iddiası eklenmemiştir. Demo niteliği bu belgede kayıtlıdır; `robots` ayarı indekslemeyi engeller.
 
@@ -33,10 +33,12 @@ Bizde tek parça, ekran genişliğinde uygulama fotoğrafı; sol/alt bölgede de
 ## Dosyalar ve bileşen sınırları
 
 - `src/app/globals.css`: Renk, typography, spacing, header yüksekliği, görsel odağı, buton, focus, responsive ve azaltılmış hareket token/stilleri.
-- `src/app/layout.tsx`: Türkçe dil, VANTA metadata, indeksleme engeli, ortak header ve içeriğe geç bağlantısı.
+- `src/app/layout.tsx`: Türkçe dil, VANTA metadata, indeksleme engeli, ortak header/footer ve içeriğe geç bağlantısı.
+- `src/app/hakkimizda/page.tsx`: Bağımsız Hakkımızda sayfası, metadata, yaklaşım metni ve yerel dört adımlı içerik. Server Component.
+- `src/components/footer.tsx`: Marka açıklaması, sayfa ve hizmet navigasyonu, demo bilgisi. Server Component.
 - `src/app/page.tsx`: Ana içerik, sırasıyla `Hero`, `Services` ve `GalleryPreview` bileşimi.
 - `src/components/header.tsx`: Kompakt marka, ortak navigasyon ve hizmet CTA'sı. Server Component; bağlantılar route durumunu okuyabilen küçük `NavigationLinks` bileşeninden gelir.
-- `src/components/navigation-links.tsx`: Client Component. `usePathname` ile doğru `aria-current="page"` durumunu verir. Hizmet adları gerçek detay sayfalarına, Galeri `/galeri`, Hizmetleri İncele `/hizmetler` adresine gider.
+- `src/components/navigation-links.tsx`: Client Component. `usePathname` ile doğru `aria-current="page"` durumunu verir. Hizmet adları gerçek detay sayfalarına, Galeri `/galeri`, Hakkımızda `/hakkimizda`, Hizmetleri İncele `/hizmetler` adresine gider.
 - `src/components/hero.tsx`: Mevcut hero metni ve responsive gerçek fotoğraf. Eski düz hizmet listesi bu bileşenden çıkarıldı; hero'nun kendisi korunur. Server Component.
 - `src/components/services.tsx`: Üç fotoğraflı ana sayfa hizmet önizlemesi. Ortak `services` dizisini `map()` ile semantik `article` öğelerine dönüştürür. Mevcut düzen ve anchor kimlikleri korunur. Tüm Hizmetler bağlantısı `/hizmetler` adresine gider. Server Component.
 - `src/data/services.ts`: `Service` tipi ve üç hizmetin ortak dizisi. Önizleme alanlarına ek olarak `detail` içinde metadata, açıklama, faydalar, süreç, FAQ ve iki fotoğraf kaydı bulunur.
@@ -51,6 +53,8 @@ Bizde tek parça, ekran genişliğinde uygulama fotoğrafı; sol/alt bölgede de
 - `tests/gallery.browser.js`: Mevcut Playwright MCP'de çalıştırılabilen, bağımlılık eklemeyen galeri kontrolleri.
 - `tests/services.browser.js`: Mevcut Playwright MCP'de çalışan hizmet kataloğu, navigasyon ve responsive kontrolleri.
 - `tests/service-details.browser.js`: Üç detay sayfası, 404, metadata, responsive görseller, FAQ ve detay bağlantılarının tarayıcı kontrolleri.
+- `tests/about-footer.browser.js`: Yedi sayfa × altı genişlikte footer/header regresyonu, Hakkımızda içeriği ve bağlantıların klavye kontrolleri.
+- `src/assets/images/about-surface-care.jpg`, `about-wash-preparation.jpg`: Hakkımızda sayfasına özel iki gerçek Pexels fotoğrafı.
 - `src/assets/images/detailing-hero.jpg`: Masaüstü fotoğrafı.
 - `src/assets/images/detailing-hero-mobile.jpg`: Aynı fotoğrafın mobil kompozisyonu.
 - `src/assets/images/SOURCES.md`: Fotoğrafçı, kaynak, lisans, çözünürlük ve kırpma kaydı.
@@ -340,3 +344,71 @@ npm run start -- --port 3009
 Geliştirme için `npm run dev` kullanabilirsiniz. Mevcut sunucu çalışıyorsa tekrar başlatmayın. `/hizmetler/ppf-kaplama`, `/hizmetler/seramik-kaplama` ve `/hizmetler/detailing` adreslerini doğrudan açın.
 
 Gerçek işletme çekimleri ve seçilecek ürünlere özel içerik henüz yoktur; stok notu ve global noindex korunur. Gerçek cihaz, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. API, backend, MySQL, Flyway, Docker, admin veya Git işlemi yapılmadı.
+
+## Faz 7 — Hakkımızda ve global footer
+
+### Dosyalar ve route
+
+Yeni dosyalar:
+
+- `src/app/hakkimizda/page.tsx`: Giriş, Yaklaşımımız, dört aşamalı Uygulama anlayışı, iki fotoğraf ve hizmet/galeri bağlantıları.
+- `src/components/footer.tsx`: VANTA marka alanı, sayfa/hizmet bağlantı grupları ve demo bilgisi.
+- `src/assets/images/about-surface-care.jpg`, `about-wash-preparation.jpg`: Bu sayfaya özel iki gerçek çekim.
+- `tests/about-footer.browser.js`: Footer'ın yedi public route ve altı ekran genişliğindeki yerleşimi; header, Hakkımızda, bağlantı ve klavye kontrolleri.
+
+Değişen dosyalar: `src/app/layout.tsx`, `src/components/navigation-links.tsx`, `src/app/globals.css`, `src/assets/images/SOURCES.md` ve bu README. Mevcut Hero, Gallery, MobileMenu ve hizmet verisi dosyaları değiştirilmedi.
+
+App Router, `app/hakkimizda/page.tsx` dosyasını `/hakkimizda` adresine eşler. Sayfa doğrudan açılır; build sırasında statik üretilir. Statik `metadata` export'u title, description ve Open Graph alanlarını tanımlar. Root layout'taki global `noindex, nofollow` miras alınır. Tek H1 ve üç içerik H2'si vardır.
+
+### İçerik ve Server Component sınırı
+
+Hakkımızda metni, bir demo markanın hizmet yaklaşımını açıklar. Kuruluş yılı, ekip, müşteri sayısı, sertifika, garanti veya gerçek işletme operasyonu iddiası yoktur. Demo niteliği metinde, stok fotoğraf niteliği iki caption'da belirtilir. Dört adımın başlık/açıklama kayıtları yalnızca bu sayfada kullanıldığından yerel `applicationSteps` dizisinde tutulur; ek veri katmanı oluşturulmadı. Gerçek süreç sırası olduğu için semantik `ol` kullanılır; `role="list"`, CSS ile işaret biçimi değiştirildiğinde liste semantiğini korur.
+
+Footer bağlantılarının sayfa grubu dört sabit URL'dir. Hizmet grubu mevcut `services` dizisinden gelir; hizmet adları ve slug'lar ikinci bir kaynakta çoğaltılmaz. Bütün yeni dahili bağlantılar `next/link` kullanır. Telefon, e-posta, adres, sosyal medya veya henüz olmayan iletişim/teklif bağlantısı yoktur. Alt satır `© VANTA` ve demo açıklamasını içerir; tarih üretmek için tarayıcı JavaScript'i eklenmedi.
+
+Root layout'ta `{children}` sonrasına bir kez `<Footer />` eklenir. Böylece mevcut yedi public route aynı footer'ı alır; sayfalara ayrı ayrı import gerekmez. Henüz admin route'u yoktur. İleride admin layout'u eklenirken public header/footer sınırı ayrıca düzenlenebilir; bugün bunun için route group veya ek abstraction kurulmadı.
+
+AboutPage ve Footer Server Component'tir: state, effect veya event handler gerektirmezler. Yeni Client Component yoktur. Mevcut `NavigationLinks`, pathname üzerinden Hakkımızda bağlantısına aktif durum verir. Aynı bileşen desktop ve mobilde kullanıldığı için bağlantı iki menüye de yansır. Header boşlukları kontrollü biçimde küçültüldü; mevcut hizmet bağlantıları ve 1024 px mobil menü eşiği korunur. MobileMenu kodu değişmedi.
+
+### Görsel düzen ve responsive yaklaşım
+
+Girişte başlık ve kısa metnin altında geniş bir yakın plan fotoğraf bulunur; homepage hero'sunun fotoğraf üstü metin düzeni kopyalanmaz. Kırık beyaz alanda dar bir okuma sütunu, ardından dört aşama ve sağa hizalı daha küçük bir hazırlık fotoğrafı vardır. Galeri/katalog düzeni tekrar edilmez. Footer koyu grafit yüzey, kontrollü büyük VANTA yazısı ve iki kullanışlı bağlantı grubuyla devam eder.
+
+Mevcut `--text-page-title`, `--text-section-title`, `--page-space`, renkler ve container korunur. Okuma sütunu 65ch ile sınırlıdır. Yeni CSS, Tailwind CSS 4 kurulumu üzerinde `@layer components` içinde `about-` / `footer-` sınıflarıyla sınırlandırılır. Header'da yalnızca grup aralıkları değişti. Yeni font, gradient, animasyon veya kütüphane yoktur.
+
+Desktop'ta süreç dört sütun, 1024 px altında iki, 768 px altında tek sütundur. İlk fotoğraf desktop/tablette 16:7, mobilde 4:5; ikinci fotoğraf her boyutta 3:2 oranındadır. İkinci fotoğraf desktop'ta container'ın %75'ini, mobilde tamamını kullanır. Footer desktop/tablette marka + iki navigasyon sütunudur. Mobilde marka tam satıra, bağlantılar iki sütuna geçer; alt bilgi ve CTA'lar alt alta dizilir. Bağlantılar en az 44 px yüksekliğindedir; global focus-visible korunur.
+
+İki fotoğrafın toplam yerel boyutu 392003 bayttır. Mevcut `sharp` ile boyutlandırılıp sıkıştırıldı; fotoğrafçı, lisans, kaynak URL ve dosya yolları `SOURCES.md` içinde kayıtlıdır. Statik import, `next/image`, `fill`, responsive `sizes` ve önceden ayrılan `aspect-ratio` alanları kullanılır. İlk fotoğraf eager/high priority; ikincisi lazy/blur'dır. Mobilde el ve bez, ikinci çekimde suyla temizlik görünür. Fotoğraflar VANTA'nın müşterisi, çalışanı veya tesisi olarak sunulmaz.
+
+### Faz 7 doğrulaması — 23 Ekim 2026
+
+- Son `npm run lint`: başarılı.
+- Son `npm run build`: başarılı; `/hakkimizda` statik üretildi. Son okuma sütunu düzeltmesinden sonra yeniden çalıştırıldı.
+- `npx --no-install tsc --noEmit`: başarılı; son build sonrasında çalıştırıldı.
+- Dört tarayıcı test dosyası ayrıca ESLint ile kontrol edildi; güncellenen yeni test dosyası da son kez kontrol edildi. Hata/uyarı yok.
+- Son production sunucusu: `http://127.0.0.1:3010`. `/hakkimizda` doğrudan HTTP 200 döndürdü.
+- `tests/about-footer.browser.js` son build üzerinde geçti: 1440 × 1000, 1280 × 900, 1024 × 900, 768 × 1024, 390 × 844, 375 × 812. Her genişlikte yedi public route, tek global footer, yedi gerçek navigasyon hedefi, etkileşim alanları, footer'ın main sonrasındaki konumu, noindex ve yatay taşma kontrol edildi.
+- Header'ın 1440/1280/1024 px'te marka ve bağlantıları çakışmadan tek satıra sığdığı ölçüldü. Desktop ve mobil Hakkımızda bağlantısı, aktif durum, Enter/Space/Escape, mobil menü kapanması, odak dönüşü ve iki sayfa sonu CTA'sı çalıştı. Footer'daki yedi bağlantı klavyeyle gerçekten açıldı.
+- İlk footer focus testi yalnızca programatik `focus()` sonrasında klavye focus halkası bekliyordu. Test gerçek Tab/Shift+Tab geçişiyle düzeltildi ve geçti; uygulamada focus stili zaten vardı.
+- Altı genişliğin ekran görüntüleri incelendi. Başlıklar, boşluklar, fotoğraf kırpımları, tablet süreç düzeni, mobil menü ve galeriden footer'a geçiş kontrol edildi. Son okuma sütunu değişikliği sonrasında desktop/mobil tam sayfa görüntüleri yeniden incelendi.
+- `tests/services.browser.js`, `tests/gallery.browser.js`, `tests/service-details.browser.js` regresyonları geçti. Galeri filtreleri, sekiz fotoğraf, lightbox, Escape ve odak dönüşü; detay FAQ, dahili bağlantılar ve geçersiz slug için HTTP 404 korundu. Son CSS değişikliği yalnızca Hakkımızda okuma sütununu etkiler; son footer testi bütün route'ları yeniden kontrol etti.
+- Galeri başlığının önceki düzeltmesi altı genişlikte doğrulandı; masaüstünde en fazla 60 px, mobilde 36 px. Hakkımızda aynı H1 token'ını kullanır.
+- JavaScript kapalı ayrı 390 px bağlamında Hakkımızda içeriği, iki fotoğraf ve yedi footer navigasyon bağlantısı sunucudan geldi. Optimize görsel isteği HTTP 200 / `image/webp` döndürdü.
+- Hesaplanan metin kontrastları: ana metin 15,56:1; footer ikincil metni 8,62:1; açık zemindeki ikincil metin 5,44:1.
+- Aynı tarayıcı sekmesinde çok sayıda responsive geçiş sırasında kullanılmayan görsel preload uyarısı oluştu; önbellekte daha büyük responsive türev seçilmişti. Temiz, ayrı 1440/375 px bağlamlarında altı saniye gözlem yapıldı: hata/uyarı yok; uygun görseller seçildi. Beklenen geçersiz URL kontrolü konsolda HTTP 404 kaydı oluşturur; bu testin beklenen sonucudur.
+- Hero, Gallery, MobileMenu ve services veri dosyalarının SHA-256 değerleri çalışma öncesiyle aynı.
+
+### Çalıştırma ve tekrar kontrol
+
+`frontend` dizininde geliştirme için `npm run dev` kullanın. Production kontrolü için sırayla:
+
+```powershell
+npm run lint
+npm run build
+npx --no-install tsc --noEmit
+npm run start -- --port 3010
+```
+
+Sunucu zaten çalışıyorsa mevcut adresi açın. Tarayıcıda `/hakkimizda` sayfasını, menüde Hakkımızda bağlantısını ve sayfa sonundaki footer'ı inceleyin. Mevcut Playwright MCP'de çalışan uygulama sekmesi üzerinden `browser_run_code_unsafe` aracına `filename: "frontend/tests/about-footer.browser.js"` verilebilir. Diğer üç test de aynı yöntemle çalışır. Bunlar bağımsız CLI test runner'ı değildir; yeni test bağımlılığı kurulmadı. Geçici ekran görüntüleri `.next/qa/phase7` içindedir ve build sırasında kaybolabilir.
+
+Gerçek işletme bilgileri ve onaylı müşteri/stüdyo çekimleri henüz yoktur; demo ve stok notları ile noindex korunur. Gerçek cihaz, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. İletişim, teklif, admin, backend, MySQL, Flyway, Docker ve Git işlemi bu kapsamda yapılmadı.

@@ -1,6 +1,24 @@
 # Görsel kaynakları ve kullanım kaydı
 
-Kontrol tarihi: 22 Ekim 2026.
+Son kontrol: 23 Ekim 2026. Önceki faz kayıtları kendi kontrol tarihlerini korur.
+
+## Faz 7 — Hakkımızda sayfası
+
+İki yeni gerçek çekim bu sayfaya özeldir; mevcut galeri veya hizmet fotoğrafları tekrarlanmaz. Fotoğrafçı **Tima Miroshnichenko**. Kaynak sayfaları ve [Pexels License](https://www.pexels.com/license/) 23 Ekim 2026 tarihinde kontrol edildi. Web kullanımı ve düzenleme lisans kapsamında; atıf zorunlu değildir. Değiştirilmemiş kopyaları satma, stok platformlarında yeniden dağıtma, ticari marka olarak kullanma ve kişi/marka desteği ima etme kısıtları korunur.
+
+| Konu | Kaynak URL | Fotoğrafçı | Lisans | Projedeki dosya |
+| --- | --- | --- | --- | --- |
+| Gövdenin mikrofiber bezle temizlenmesi | https://www.pexels.com/photo/a-person-wiping-a-car-with-a-cleaning-cloth-6872572/ | Tima Miroshnichenko | Pexels License | `frontend/src/assets/images/about-surface-care.jpg` |
+| Köpüklü yüzeyin suyla durulanması | https://www.pexels.com/photo/a-woman-cleaning-a-car-6873081/ | Tima Miroshnichenko | Pexels License | `frontend/src/assets/images/about-wash-preparation.jpg` |
+
+| Dosya | Orijinal URL | Orijinal çözünürlük | Yerel çözünürlük / boyut |
+| --- | --- | --- | --- |
+| `about-surface-care.jpg` | https://images.pexels.com/photos/6872572/pexels-photo-6872572.jpeg | 3950 × 5925 | 1400 × 2100 / 158397 bayt |
+| `about-wash-preparation.jpg` | https://images.pexels.com/photos/6873081/pexels-photo-6873081.jpeg | 5860 × 3907 | 1600 × 1066 / 233606 bayt |
+
+Kaynak sayfalarındaki yayın tarihi 19 Şubat 2021'dir. İki çekim de indirilip incelendi. İlk fotoğraf gövdeye bezle teması, ikincisi köpüklü araca suyla durulamayı gösterir; ikincisi PPF/seramik uygulaması olarak etiketlenmez. Mevcut `sharp` ile EXIF yön düzeltme, orantılı küçültme ve kalite 85 JPEG sıkıştırması yapıldı. Kalıcı kırpma, AI üretimi veya generatif düzenleme yoktur. Gösterim kırpımı `globals.css` içinde yönetilir; ilk fotoğrafta bez ve el kadrajda tutulur.
+
+İki caption'da stok niteliği açıkça belirtilir. Fotoğraflar VANTA'nın müşterisi, çalışanı veya tesisi olarak sunulmaz. Sayfada VANTA'nın demo marka olduğu ayrıca açıklanır. `next/image` görselleri yerel statik import'lardan optimize eder; çalışma anında Pexels'e istek gerekmez.
 
 ## Faz 5 — Bağımsız /hizmetler sayfası
 
