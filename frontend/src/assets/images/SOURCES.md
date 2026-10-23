@@ -2,6 +2,10 @@
 
 Son kontrol: 23 Ekim 2026. Önceki faz kayıtları kendi kontrol tarihlerini korur.
 
+## Faz 9 — Mevcut iletişim fotoğrafının kadrajı
+
+Yeni fotoğraf indirilmedi veya üretilmedi; aşağıdaki Faz 8 kaynak/lisans kaydı değişmedi. `contact-detailing-tools.jpg` dosyasına kalıcı kırpma yapılmadı. Yalnızca CSS gösterimi değişti: masaüstünde 4:3, tablette 3:2, mobilde 4:5 oranı ve `object-fit: cover` kullanılır. Masaüstü odağı `50% 70%`; öndeki şişeler, pedler, polisaj makinesi ve bezler görünür tutulur. Fotoğraf artık hizmet rehberi boyunca uzamaz; rehber masaüstünde fotoğrafın altındaki tam genişlikte üç sütuna yerleşir. Caption 14 px oldu; stok/VANTA açıklaması korundu. Altı genişlikte kadrajlar görsel olarak incelendi.
+
 ## Faz 8 — İletişim sayfası
 
 Bu sayfaya özel yeni, gerçek bir detailing ekipmanı fotoğrafı kullanılır. Kaynak sayfası ve [Pexels License](https://www.pexels.com/license/) 23 Ekim 2026 tarihinde kontrol edildi. Web kullanımı ve düzenleme lisans kapsamında; atıf zorunlu değildir. Kişi veya marka desteği, yetkili uygulayıcılık veya VANTA'nın bu ürünleri kullandığı iddia edilmez. Değiştirilmemiş kopyaları satma, stok platformlarında yeniden dağıtma ve ticari marka olarak kullanma kısıtları korunur.

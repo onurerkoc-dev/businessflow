@@ -4,7 +4,7 @@ async (page) => {
   const assert = (condition, message) => {
     if (!condition) throw new Error(message);
   };
-  const routes = ["/", "/hizmetler", "/galeri", "/hakkimizda", "/iletisim", "/hizmetler/ppf-kaplama", "/hizmetler/seramik-kaplama", "/hizmetler/detailing"];
+  const routes = ["/", "/hizmetler", "/galeri", "/hakkimizda", "/iletisim", "/teklif-al", "/hizmetler/ppf-kaplama", "/hizmetler/seramik-kaplama", "/hizmetler/detailing"];
   const results = [];
   await page.emulateMedia({ reducedMotion: "reduce" });
 
@@ -77,7 +77,7 @@ async (page) => {
   await page.locator(".about-actions").getByRole("link", { name: "Hizmetleri İncele", exact: true }).click();
   await page.waitForURL("**/hizmetler");
 
-  for (const [name, route] of [["Ana Sayfa", "/"], ["Hizmetler", "/hizmetler"], ["Galeri", "/galeri"], ["Hakkımızda", "/hakkimizda"], ["İletişim", "/iletisim"], ["PPF Kaplama", "/hizmetler/ppf-kaplama"], ["Seramik Kaplama", "/hizmetler/seramik-kaplama"], ["Detailing", "/hizmetler/detailing"]]) {
+  for (const [name, route] of [["Ana Sayfa", "/"], ["Hizmetler", "/hizmetler"], ["Galeri", "/galeri"], ["Hakkımızda", "/hakkimizda"], ["İletişim", "/iletisim"], ["Teklif Al", "/teklif-al"], ["PPF Kaplama", "/hizmetler/ppf-kaplama"], ["Seramik Kaplama", "/hizmetler/seramik-kaplama"], ["Detailing", "/hizmetler/detailing"]]) {
     const link = page.locator(".footer-navigation").getByRole("link", { name, exact: true });
     await link.focus();
     await page.keyboard.press("Tab");

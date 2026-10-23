@@ -77,12 +77,12 @@ export default function ContactPage() {
 
       <section className="contact-explore site-container" aria-labelledby="contact-explore-title">
         <div>
-          <h2 id="contact-explore-title">Uygulamalara yakından bakın</h2>
-          <p>Film yerleşiminden yüzey bakımına, hizmetlerin uygulama detaylarını keşfedin.</p>
+          <h2 id="contact-explore-title">Teklif talebinizi hazırlayın</h2>
+          <p>Formda araç bilgilerinizi kontrol edebilirsiniz. Bu aşamada gönderim yapılmaz.</p>
         </div>
         <div className="contact-actions">
-          <Link className="button button-primary" href="/galeri">Galeriyi İncele</Link>
-          <Link className="button button-outline" href="/hizmetler">Tüm Hizmetler</Link>
+          <Link className="button button-primary" href="/teklif-al">Teklif Al</Link>
+          <Link className="button button-outline" href="/galeri">Galeriyi İncele</Link>
         </div>
       </section>
     </main>

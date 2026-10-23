@@ -16,7 +16,7 @@ export function NavigationLinks() {
       <Link className="nav-link" href="/galeri" aria-current={pathname === "/galeri" ? "page" : undefined}>Galeri</Link>
       <Link className="nav-link" href="/hakkimizda" aria-current={pathname === "/hakkimizda" ? "page" : undefined}>Hakkımızda</Link>
       <Link className="nav-link" href="/iletisim" aria-current={pathname === "/iletisim" ? "page" : undefined}>İletişim</Link>
-      <Link className="button button-outline nav-cta" href="/hizmetler" aria-current={pathname === "/hizmetler" ? "page" : undefined}>Hizmetleri İncele</Link>
+      <Link className="button button-primary nav-cta" href="/teklif-al" aria-current={pathname === "/teklif-al" ? "page" : undefined}>Teklif Al</Link>
     </>
   );
 }

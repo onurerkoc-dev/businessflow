@@ -36,9 +36,11 @@ async (page) => {
   await page.goto(`${baseUrl}/`);
   const preview = await page.locator(".service-copy").allTextContents();
   assert(preview.length === 3, "Homepage retains three services");
-  await page.locator(".desktop-nav").getByRole("link", { name: "Hizmetleri İncele", exact: true }).click();
+  await page.locator(".desktop-nav").getByRole("link", { name: "Teklif Al", exact: true }).click();
+  await page.waitForURL("**/teklif-al");
+  assert(await page.locator('.desktop-nav a[aria-current="page"]').textContent() === "Teklif Al", "Quote navigation must be active");
+  await page.locator(".footer-navigation").getByRole("link", { name: "Hizmetler", exact: true }).click();
   await page.waitForURL("**/hizmetler");
-  assert(await page.locator('.desktop-nav a[aria-current="page"]').textContent() === "Hizmetleri İncele", "Services navigation must be active");
   await page.goto(`${baseUrl}/`);
   await page.getByRole("link", { name: "Tüm Hizmetler", exact: true }).focus();
   await page.keyboard.press("Enter");
@@ -46,19 +48,19 @@ async (page) => {
   await page.locator(".desktop-nav").getByRole("link", { name: "Galeri", exact: true }).click();
   await page.waitForURL("**/galeri");
   assert(await page.locator(".gallery-tile").count() === 8, "Gallery retains eight photos");
-  await page.locator(".desktop-nav").getByRole("link", { name: "Hizmetleri İncele", exact: true }).click();
+  await page.locator(".footer-navigation").getByRole("link", { name: "Hizmetler", exact: true }).click();
   await page.waitForURL("**/hizmetler");
 
   await page.setViewportSize({ width: 375, height: 812 });
   await page.locator("summary").focus();
   await page.keyboard.press("Enter");
-  assert(await page.locator('#mobile-navigation a[aria-current="page"]').textContent() === "Hizmetleri İncele", "Mobile services active state");
+  assert(await page.locator('#mobile-navigation a[href^="/hizmetler/"]').count() === 3, "Mobile service detail links retained");
   await page.locator("#mobile-navigation").getByRole("link", { name: "Galeri", exact: true }).click();
   await page.waitForURL("**/galeri");
   await page.locator("summary").focus();
   await page.keyboard.press("Space");
-  await page.locator("#mobile-navigation").getByRole("link", { name: "Hizmetleri İncele", exact: true }).click();
-  await page.waitForURL("**/hizmetler");
+  await page.locator("#mobile-navigation").getByRole("link", { name: "Teklif Al", exact: true }).click();
+  await page.waitForURL("**/teklif-al");
   assert(await page.locator(".mobile-menu").evaluate((el) => !el.open), "Mobile menu closes on navigation");
   await page.goto(`${baseUrl}/`);
   assert(JSON.stringify(await page.locator(".service-copy").allTextContents()) === JSON.stringify(preview), "Homepage services unchanged after navigation");

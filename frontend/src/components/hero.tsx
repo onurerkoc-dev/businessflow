@@ -1,4 +1,5 @@
 import Image, { getImageProps } from "next/image";
+import Link from "next/link";
 import heroPhoto from "@/assets/images/detailing-hero.jpg";
 import heroMobilePhoto from "@/assets/images/detailing-hero-mobile.jpg";
 
@@ -32,12 +33,10 @@ export function Hero() {
               PPF kaplama, seramik kaplama ve detaylı araç bakımı.
               Aracınıza uygun uygulamayı keşfedin.
             </p>
-            <a className="button button-primary" href="#services-intro">
-              Hizmetleri İncele
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M3 9h11m-4-4 4 4-4 4" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            </a>
+            <div className="hero-actions">
+              <Link className="button button-primary" href="/teklif-al">Teklif Al</Link>
+              <Link className="button button-outline" href="#services-intro">Hizmetleri İncele</Link>
+            </div>
           </div>
         </div>
       </section>
