@@ -19,6 +19,7 @@ export function Footer() {
               <li><Link href="/hizmetler">Hizmetler</Link></li>
               <li><Link href="/galeri">Galeri</Link></li>
               <li><Link href="/hakkimizda">Hakkımızda</Link></li>
+              <li><Link href="/iletisim">İletişim</Link></li>
             </ul>
           </nav>
           <nav className="footer-navigation" aria-labelledby="footer-services-title">

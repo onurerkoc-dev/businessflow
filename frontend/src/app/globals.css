@@ -205,7 +205,7 @@
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 1.5vw, 1.5rem);
+    gap: clamp(0.75rem, 1.2vw, 1.25rem);
   }
 
   .nav-link {
@@ -1731,6 +1731,219 @@
 
     .footer-bottom {
       flex-direction: column;
+    }
+  }
+}
+
+@layer components {
+  .contact-content {
+    padding-block: var(--page-space);
+    background: var(--foreground);
+    color: var(--background);
+    color-scheme: light;
+  }
+
+  .contact-content :focus-visible {
+    outline-color: var(--focus-on-light);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-areas: "intro photo" "information photo" "services photo";
+    align-items: start;
+    gap: var(--space-7) clamp(2rem, 5vw, 5rem);
+  }
+
+  .contact-intro {
+    grid-area: intro;
+  }
+
+  .contact-intro h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-page-title);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+
+  .contact-intro p {
+    max-width: 46ch;
+    margin-top: var(--space-5);
+    font-size: var(--text-lead);
+    line-height: 1.8;
+  }
+
+  .contact-page h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-section-title);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  .contact-information {
+    grid-area: information;
+    padding-block: var(--space-6);
+    border-block: 1px solid var(--border-on-light);
+  }
+
+  .contact-information > p {
+    max-width: 50ch;
+    margin-top: var(--space-4);
+    color: var(--muted-on-light);
+    line-height: 1.8;
+  }
+
+  .contact-details {
+    display: grid;
+    gap: var(--space-5);
+    margin: var(--space-6) 0 0;
+  }
+
+  .contact-details dt {
+    color: var(--muted-on-light);
+    font-size: var(--text-small);
+  }
+
+  .contact-details dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+  }
+
+  .contact-details a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .contact-details a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .contact-photo {
+    grid-area: photo;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    min-width: 0;
+  }
+
+  .contact-photo-media {
+    position: relative;
+    flex: 1;
+    aspect-ratio: 2 / 3;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .contact-photo-media img {
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+
+  .contact-photo figcaption {
+    margin-top: var(--space-3);
+    color: var(--muted-on-light);
+    font-size: var(--text-small);
+    line-height: 1.7;
+  }
+
+  .contact-services {
+    grid-area: services;
+  }
+
+  .contact-services ul {
+    margin-top: var(--space-5);
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-services li + li {
+    border-top: 1px solid var(--border-on-light);
+  }
+
+  .contact-services a {
+    display: block;
+    padding-block: var(--space-4);
+  }
+
+  .contact-services h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.3;
+  }
+
+  .contact-services p {
+    max-width: 55ch;
+    margin-top: var(--space-2);
+    color: var(--muted-on-light);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  .contact-services a:hover h3 {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: var(--focus-on-light);
+  }
+
+  .contact-explore {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--page-space);
+  }
+
+  .contact-explore p {
+    max-width: 55ch;
+    margin-top: var(--space-4);
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  @media (max-width: 63.999rem) {
+    .contact-layout {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "intro" "information" "photo" "services";
+      row-gap: var(--space-6);
+    }
+
+    .contact-photo-media {
+      flex: none;
+      aspect-ratio: 3 / 2;
+    }
+
+    .contact-photo-media img {
+      object-position: 50% 70%;
+    }
+  }
+
+  @media (max-width: 47.999rem) {
+    .contact-photo-media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .contact-actions {
+      width: 100%;
+    }
+
+    .contact-actions .button {
+      flex: 1 1 12rem;
     }
   }
 }

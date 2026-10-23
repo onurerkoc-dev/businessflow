@@ -1,8 +1,8 @@
 # BusinessFlow — Premium frontend redesign
 
-Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 7'de Hakkımızda sayfası ve bütün mevcut public sayfalarda gösterilen ortak footer eklendi. Ana sayfanın hero'su ve galeri etkileşimleri korunur. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihsel doğrulamalardır; güncel uygulama notları Faz 7 bölümündedir.
+Frontend; ana sayfa, `/galeri`, `/hizmetler`, `/hakkimizda`, `/iletisim` ve üç bağımsız hizmet detay sayfasından oluşur. Faz 8'de bağımsız İletişim sayfası ve header/footer bağlantıları eklendi. Ana sayfanın hero'su, galeri etkileşimleri ve Hakkımızda sayfasının ortalanmış fotoğrafı korunur. Backend, veritabanı, admin veya talep yönetimi entegrasyonu içermez. Yeni bağımlılık eklenmedi. Aşağıdaki faz kayıtları tarihseldir; güncel uygulama notları Faz 8 bölümündedir.
 
-**VANTA geçici proje markasıdır.** Kullanıcı arayüzünde demo etiketleri gösterilmez; gerçek bir adres, telefon, müşteri yorumu, sertifika, garanti veya geçmiş proje iddiası eklenmemiştir. Demo niteliği bu belgede kayıtlıdır; `robots` ayarı indekslemeyi engeller.
+**VANTA geçici proje markasıdır.** Demo niteliği Hakkımızda, İletişim ve footer'da kısa biçimde açıklanır. Uydurma adres, telefon, e-posta, çalışma saati, müşteri yorumu, sertifika, garanti veya geçmiş proje iddiası yoktur. `robots` ayarı indekslemeyi engeller.
 
 ## Çalıştırma
 
@@ -36,9 +36,11 @@ Bizde tek parça, ekran genişliğinde uygulama fotoğrafı; sol/alt bölgede de
 - `src/app/layout.tsx`: Türkçe dil, VANTA metadata, indeksleme engeli, ortak header/footer ve içeriğe geç bağlantısı.
 - `src/app/hakkimizda/page.tsx`: Bağımsız Hakkımızda sayfası, metadata, yaklaşım metni ve yerel dört adımlı içerik. Server Component.
 - `src/components/footer.tsx`: Marka açıklaması, sayfa ve hizmet navigasyonu, demo bilgisi. Server Component.
+- `src/app/iletisim/page.tsx`: İletişim giriş alanı, doğrulanmış bilgi bulunmadığında demo açıklaması, hizmet rehberi ve galeri/katalog yönlendirmeleri. Server Component.
+- `src/data/contact.ts`: İsteğe bağlı telefon, e-posta, adres ve çalışma saatlerinin tipli yerel kaydı; doğrulanmış veri bulunmadığı için boş.
 - `src/app/page.tsx`: Ana içerik, sırasıyla `Hero`, `Services` ve `GalleryPreview` bileşimi.
 - `src/components/header.tsx`: Kompakt marka, ortak navigasyon ve hizmet CTA'sı. Server Component; bağlantılar route durumunu okuyabilen küçük `NavigationLinks` bileşeninden gelir.
-- `src/components/navigation-links.tsx`: Client Component. `usePathname` ile doğru `aria-current="page"` durumunu verir. Hizmet adları gerçek detay sayfalarına, Galeri `/galeri`, Hakkımızda `/hakkimizda`, Hizmetleri İncele `/hizmetler` adresine gider.
+- `src/components/navigation-links.tsx`: Client Component. `usePathname` ile doğru `aria-current="page"` durumunu verir. Hizmet adları gerçek detay sayfalarına; Galeri, Hakkımızda ve İletişim kendi route'larına; Hizmetleri İncele `/hizmetler` adresine gider.
 - `src/components/hero.tsx`: Mevcut hero metni ve responsive gerçek fotoğraf. Eski düz hizmet listesi bu bileşenden çıkarıldı; hero'nun kendisi korunur. Server Component.
 - `src/components/services.tsx`: Üç fotoğraflı ana sayfa hizmet önizlemesi. Ortak `services` dizisini `map()` ile semantik `article` öğelerine dönüştürür. Mevcut düzen ve anchor kimlikleri korunur. Tüm Hizmetler bağlantısı `/hizmetler` adresine gider. Server Component.
 - `src/data/services.ts`: `Service` tipi ve üç hizmetin ortak dizisi. Önizleme alanlarına ek olarak `detail` içinde metadata, açıklama, faydalar, süreç, FAQ ve iki fotoğraf kaydı bulunur.
@@ -53,8 +55,10 @@ Bizde tek parça, ekran genişliğinde uygulama fotoğrafı; sol/alt bölgede de
 - `tests/gallery.browser.js`: Mevcut Playwright MCP'de çalıştırılabilen, bağımlılık eklemeyen galeri kontrolleri.
 - `tests/services.browser.js`: Mevcut Playwright MCP'de çalışan hizmet kataloğu, navigasyon ve responsive kontrolleri.
 - `tests/service-details.browser.js`: Üç detay sayfası, 404, metadata, responsive görseller, FAQ ve detay bağlantılarının tarayıcı kontrolleri.
-- `tests/about-footer.browser.js`: Yedi sayfa × altı genişlikte footer/header regresyonu, Hakkımızda içeriği ve bağlantıların klavye kontrolleri.
+- `tests/about-footer.browser.js`: Sekiz sayfa × altı genişlikte footer/header regresyonu, Hakkımızda fotoğraf hizası ve bağlantıların klavye kontrolleri.
+- `tests/contact.browser.js`: İletişim içeriği, metadata, fotoğraf, gerçek bağlantılar ve mobil/klavye navigasyonu.
 - `src/assets/images/about-surface-care.jpg`, `about-wash-preparation.jpg`: Hakkımızda sayfasına özel iki gerçek Pexels fotoğrafı.
+- `src/assets/images/contact-detailing-tools.jpg`: İletişim sayfasına özel WAVYVISUALS / Pexels fotoğrafı; kaynak ve lisans `SOURCES.md` içindedir.
 - `src/assets/images/detailing-hero.jpg`: Masaüstü fotoğrafı.
 - `src/assets/images/detailing-hero-mobile.jpg`: Aynı fotoğrafın mobil kompozisyonu.
 - `src/assets/images/SOURCES.md`: Fotoğrafçı, kaynak, lisans, çözünürlük ve kırpma kaydı.
@@ -411,4 +415,58 @@ npm run start -- --port 3010
 
 Sunucu zaten çalışıyorsa mevcut adresi açın. Tarayıcıda `/hakkimizda` sayfasını, menüde Hakkımızda bağlantısını ve sayfa sonundaki footer'ı inceleyin. Mevcut Playwright MCP'de çalışan uygulama sekmesi üzerinden `browser_run_code_unsafe` aracına `filename: "frontend/tests/about-footer.browser.js"` verilebilir. Diğer üç test de aynı yöntemle çalışır. Bunlar bağımsız CLI test runner'ı değildir; yeni test bağımlılığı kurulmadı. Geçici ekran görüntüleri `.next/qa/phase7` içindedir ve build sırasında kaybolabilir.
 
-Gerçek işletme bilgileri ve onaylı müşteri/stüdyo çekimleri henüz yoktur; demo ve stok notları ile noindex korunur. Gerçek cihaz, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. İletişim, teklif, admin, backend, MySQL, Flyway, Docker ve Git işlemi bu kapsamda yapılmadı.
+Gerçek işletme bilgileri ve onaylı müşteri/stüdyo çekimleri henüz yoktur; demo ve stok notları ile noindex korunur. Gerçek cihaz, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. İletişim, teklif, admin, backend, MySQL, Flyway, Docker ve Git işlemi Faz 7 kapsamına dahil değildi.
+
+## Faz 8 — Bağımsız İletişim sayfası
+
+### Route, içerik ve veri
+
+`src/app/iletisim/page.tsx`, App Router ile `/iletisim` URL'sini oluşturur. Doğrudan açılır ve build sırasında statik üretilir. Kendine ait title, description ve Open Graph metadata'sı vardır; root layout'taki `noindex, nofollow` değişmedi. Sayfada tek H1; iletişim bilgileri, hizmet rehberi ve son yönlendirme için üç H2 bulunur.
+
+Doğrulanmış iletişim bilgileri henüz olmadığı için görünür demo açıklaması kullanılır. Sahte telefon, e-posta, adres, çalışma saatleri, harita, form, başarı mesajı veya `/teklif-al` bağlantısı yoktur. Üç hizmetin gerçek detay bağlantıları mevcut `services` dizisinden üretilir. Son CTA'lar `/galeri` ve `/hizmetler` adreslerine gider. Bütün dahili bağlantılar `next/link` kullanır.
+
+`src/data/contact.ts`, `ContactDetails` tipi ve şimdilik boş `contactDetails` nesnesini içerir. Bilgiler doğrulandığında şu alanlar doldurulabilir:
+
+- `phone.label`: Kullanıcıya gösterilecek telefon yazımı; `phone.number`: `tel:` bağlantısına eklenecek doğrulanmış numara.
+- `email`: Doğrulanmış e-posta; sayfa bunu `mailto:` bağlantısında kullanır.
+- `address`: Düz metin adres. Satır sonları CSS ile korunur; HTML veya sahte harita üretilmez.
+- `openingHours`: Doğrulanmış çalışma saatleri.
+
+Yalnızca dolu alanlar `dl` / `dt` / `dd` ile gösterilir; eksik alanlar için boş satır veya işlevsiz düğme oluşmaz. En az bir alan dolduğunda “henüz paylaşılmadı” açıklaması kaldırılır; demo bilgisi korunur. Bu yerel yapı ileride işletme yapılandırmasıyla değiştirilebilir. Admin/API bağlantısı ve uzaktan gelen verinin doğrulaması bugün eklenmedi. Telefon/e-posta protokol bağlantıları normal anchor, dahili bağlantılar Next.js Link'tir.
+
+### Tasarım ve Server Component
+
+Sayfa kırık beyaz yüzeyde iki sütunlu editorial bir düzendir. Solda giriş, kısa iletişim durumu ve hizmet rehberi; sağda üç alan boyunca uzanan tek bir dikey ekipman fotoğrafı bulunur. Kart, sahte iletişim alanları veya yeni animasyon yoktur. Koyu zemindeki son yönlendirme alanı ortak footer'a bağlanır.
+
+Mevcut renk, font, H1/H2, spacing ve container token'ları kullanılır. Yeni stiller `@layer components` içinde `contact-` sınıflarıyla sınırlıdır. Desktop fotoğraf alanı içerik yüksekliğine uyum sağlar. 1024 px altında tek sütunda giriş → iletişim durumu → fotoğraf → hizmet rehberi sırası kullanılır. Tablet fotoğrafı 3:2, mobil fotoğrafı 4:5 oranındadır; `object-position` foreground ekipmanlarını görünür tutar. Mobil CTA'lar alt alta dizilir. Açık zeminde focus rengi mevcut `--focus-on-light` token'ıdır.
+
+Sayfa Server Component'tir; iletişim formu, state, effect veya event handler gerekmez. Yeni Client Component ve dependency eklenmedi. Mevcut header/footer root layout'tan gelir; layout dosyası değiştirilmedi. Desktop ve mobil navigasyona aynı `NavigationLinks` üzerinden İletişim eklendi ve aktif durum pathname ile belirlenir. Menü kalabalıklaşmasın diye yalnızca desktop grup aralığı biraz küçültüldü; fontlar, hizmet bağlantıları ve 1024 px menü eşiği korunur. Footer sayfa grubuna da İletişim eklendi.
+
+Yeni gerçek fotoğraf `contact-detailing-tools.jpg`, 1400 × 2104 px / 258736 bayttır. Mevcut `sharp` ile optimize edildi. `next/image`, statik import, `fill`, responsive `sizes`, eager/high priority ve önceden ayrılmış görsel alanı kullanılır. Kaynak Pexels'e çalışma anında bağımlılık yoktur. Kaynak URL, WAVYVISUALS fotoğrafçı kaydı ve lisans `src/assets/images/SOURCES.md` içindedir. Fotoğraf diğer sayfalarda tekrarlanmaz; caption bunun VANTA tesisi/müşteri işi olmadığını belirtir.
+
+### Faz 8 doğrulaması — 23 Ekim 2026
+
+- `npm run lint`: başarılı.
+- `npm run build`: başarılı; `/iletisim` statik üretildi.
+- `npx --no-install tsc --noEmit`: başarılı; build sonrasında çalıştırıldı.
+- `npx --no-install eslint tests/contact.browser.js tests/about-footer.browser.js tests/services.browser.js tests/gallery.browser.js tests/service-details.browser.js`: başarılı.
+- Production sunucusu `http://127.0.0.1:3012` üzerinde açıldı. İletişim URL'si doğrudan HTTP 200 döndürdü.
+- `tests/contact.browser.js` geçti: 1440 × 1000, 1280 × 900, 1024 × 900, 768 × 1024, 390 × 844, 375 × 812. Metadata, noindex, tek H1, H2 hiyerarşisi, üç hizmet bağlantısı, iki CTA, görsel yüklenmesi/alt/sizes/srcset, responsive sıralama ve yatay taşma kontrol edildi. Eksik bilgi açıklaması ile form/harita/uydurma telefon/e-posta/teklif bağlantısı bulunmadığı doğrulandı.
+- Desktop ve mobil İletişim bağlantıları, doğru aktif durum, footer bağlantısı, beş içerik bağlantısının klavyeyle açılması, görünür focus, menü Enter/Space/Escape ve seçim sonrası kapanma kontrolleri geçti.
+- Güncellenmiş `tests/about-footer.browser.js` geçti: sekiz sayfa × altı genişlikte ortak footer, sekiz navigasyon hedefi, 44 px bağlantı alanları, noindex, main/footer geçişi ve taşma. Header 1440/1280/1024 px'te tek satıra sığıyor; marka ve menü bağlantıları çakışmıyor.
+- Hakkımızda fotoğrafının son düzeltmesi korundu: bölüm en fazla 1200 px genişlikte ortalı; adımlar/fotoğraf aynı kenarlara hizalı. Hakkımızda sayfa dosyası değiştirilmedi. Galeri H1'i masaüstünde en fazla 60 px, mobilde 36 px kaldı.
+- `tests/services.browser.js`, `tests/gallery.browser.js` ve `tests/service-details.browser.js` regresyonları geçti. Galeri filtreleri/lightbox, Escape/odak dönüşü, hizmet detayları/FAQ, gerçek dahili bağlantılar ve geçersiz slug HTTP 404 çalışıyor.
+- Altı genişlikteki ekran görüntüleri incelendi. Özellikle 1024 px header, tablet ekipman kırpımı, mobil fotoğraf/caption, CTA'lar ve footer geçişi kontrol edildi. Yatay taşma veya açıklama/görsel çakışması görülmedi.
+
+Mevcut Playwright MCP'de çalışan uygulama sekmesi üzerinden `browser_run_code_unsafe` aracına `filename: "frontend/tests/contact.browser.js"` veya diğer test yolları verilir. Testler sekmenin origin'ini kullanır; bağımsız bir CLI test runner'ı değildir. Yeni test bağımlılığı eklenmedi. Geçici ekran görüntüleri `.next/qa/phase8` içindedir.
+
+`frontend` dizininde geliştirme için `npm run dev`; production kontrolü için sırayla:
+
+```powershell
+npm run lint
+npm run build
+npx --no-install tsc --noEmit
+npm run start -- --port 3012
+```
+
+Sunucu zaten çalışıyorsa mevcut adresi açın. Gerçek iletişim kanalları ve onaylı işletme çekimleri henüz yoktur. Form ve `/teklif-al` geliştirilmedi. Gerçek cihaz, Safari/Firefox, ekran okuyucu ve saha performansı test edilmedi. Backend, MySQL, Spring Security, Flyway, Docker, admin ve Git işlemi yapılmadı.

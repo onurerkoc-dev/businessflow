@@ -2,6 +2,21 @@
 
 Son kontrol: 23 Ekim 2026. Önceki faz kayıtları kendi kontrol tarihlerini korur.
 
+## Faz 8 — İletişim sayfası
+
+Bu sayfaya özel yeni, gerçek bir detailing ekipmanı fotoğrafı kullanılır. Kaynak sayfası ve [Pexels License](https://www.pexels.com/license/) 23 Ekim 2026 tarihinde kontrol edildi. Web kullanımı ve düzenleme lisans kapsamında; atıf zorunlu değildir. Kişi veya marka desteği, yetkili uygulayıcılık veya VANTA'nın bu ürünleri kullandığı iddia edilmez. Değiştirilmemiş kopyaları satma, stok platformlarında yeniden dağıtma ve ticari marka olarak kullanma kısıtları korunur.
+
+| Kaynak URL | Fotoğrafçı | Lisans | Projedeki dosya |
+| --- | --- | --- | --- |
+| https://www.pexels.com/photo/sprays-and-cloths-on-table-near-sports-cars-20042048/ | WAVYVISUALS | Pexels License | `frontend/src/assets/images/contact-detailing-tools.jpg` |
+
+- Orijinal: https://images.pexels.com/photos/20042048/pexels-photo-20042048.jpeg — 2687 × 4039 px.
+- Kaynak sayfasındaki yayın tarihi: 28 Ocak 2024.
+- Yerel dosya: 1400 × 2104 px / 258736 bayt. Mevcut `sharp` ile yön düzeltme, orantılı küçültme ve kalite 85 JPEG sıkıştırması uygulandı.
+- Görsel indirilip incelendi: önde polisaj ürünleri, pedler, makine ve mikrofiber bezler; arka planda otomobiller bulunur. Görsel, VANTA'nın tesisini veya müşteri çalışmasını temsil etmez; görünür caption bunu açıklar.
+- Kalıcı kırpma, generatif düzenleme veya AI üretimi yoktur. `next/image`, statik import ve responsive `sizes` kullanılır. Gösterim kırpımı `.contact-photo-media` kurallarında yönetilir; ekipmanlar kadrajın odağıdır.
+- Fotoğraf diğer sayfalarda tekrar kullanılmaz. Önceki görsel dosyaları değiştirilmedi.
+
 ## Faz 7 — Hakkımızda sayfası
 
 İki yeni gerçek çekim bu sayfaya özeldir; mevcut galeri veya hizmet fotoğrafları tekrarlanmaz. Fotoğrafçı **Tima Miroshnichenko**. Kaynak sayfaları ve [Pexels License](https://www.pexels.com/license/) 23 Ekim 2026 tarihinde kontrol edildi. Web kullanımı ve düzenleme lisans kapsamında; atıf zorunlu değildir. Değiştirilmemiş kopyaları satma, stok platformlarında yeniden dağıtma, ticari marka olarak kullanma ve kişi/marka desteği ima etme kısıtları korunur.
