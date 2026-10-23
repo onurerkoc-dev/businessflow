@@ -4,7 +4,7 @@ async (page) => {
   const assert = (condition, message) => {
     if (!condition) throw new Error(message);
   };
-  const routes = ["/", "/hizmetler", "/galeri", "/hakkimizda", "/hizmetler/ppf-kaplama", "/hizmetler/seramik-kaplama", "/hizmetler/detailing"];
+  const routes = ["/", "/hizmetler", "/galeri", "/hakkimizda", "/iletisim", "/hizmetler/ppf-kaplama", "/hizmetler/seramik-kaplama", "/hizmetler/detailing"];
   const results = [];
   await page.emulateMedia({ reducedMotion: "reduce" });
 
@@ -16,7 +16,7 @@ async (page) => {
       const footer = page.getByRole("contentinfo");
       assert(await footer.count() === 1, `${route}: one global footer`);
       const hrefs = await footer.locator("nav a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-      assert(hrefs.length === 7 && routes.every((href) => hrefs.includes(href)), "All seven footer destinations");
+      assert(hrefs.length === routes.length && routes.every((href) => hrefs.includes(href)), "All public footer destinations");
       await footer.scrollIntoViewIfNeeded();
       assert(await page.evaluate(() => {
         const footer = document.querySelector(".site-footer");
@@ -55,9 +55,17 @@ async (page) => {
           assert(await image.evaluate((el) => el.naturalWidth > 0 && el.alt.length > 30 && el.sizes && el.srcset), "About photo attributes and loading");
         }
         assert(await page.locator(".about-preparation img").getAttribute("loading") === "lazy", "Supporting photo lazy loading");
+        assert(await page.locator(".about-practice").evaluate((section) => {
+          const container = section.parentElement.getBoundingClientRect();
+          const bounds = section.getBoundingClientRect();
+          const steps = section.querySelector("ol").getBoundingClientRect();
+          const photo = section.querySelector("figure").getBoundingClientRect();
+          return bounds.width <= 1201 && Math.abs((bounds.left - container.left) - (container.right - bounds.right)) < 1 &&
+            Math.abs(steps.left - photo.left) < 1 && Math.abs(steps.right - photo.right) < 1;
+        }), "Centered about photograph and shared step alignment retained");
       }
     }
-    results.push({ width, routes: 7, footer: true, headerFits: true, overflow: false, aboutPhotos: 2, galleryHeading: true });
+    results.push({ width, routes: routes.length, footer: true, headerFits: true, overflow: false, aboutPhotos: 2, galleryHeading: true });
   }
 
   await page.setViewportSize({ width: 1280, height: 900 });
@@ -69,7 +77,7 @@ async (page) => {
   await page.locator(".about-actions").getByRole("link", { name: "Hizmetleri İncele", exact: true }).click();
   await page.waitForURL("**/hizmetler");
 
-  for (const [name, route] of [["Ana Sayfa", "/"], ["Hizmetler", "/hizmetler"], ["Galeri", "/galeri"], ["Hakkımızda", "/hakkimizda"], ["PPF Kaplama", "/hizmetler/ppf-kaplama"], ["Seramik Kaplama", "/hizmetler/seramik-kaplama"], ["Detailing", "/hizmetler/detailing"]]) {
+  for (const [name, route] of [["Ana Sayfa", "/"], ["Hizmetler", "/hizmetler"], ["Galeri", "/galeri"], ["Hakkımızda", "/hakkimizda"], ["İletişim", "/iletisim"], ["PPF Kaplama", "/hizmetler/ppf-kaplama"], ["Seramik Kaplama", "/hizmetler/seramik-kaplama"], ["Detailing", "/hizmetler/detailing"]]) {
     const link = page.locator(".footer-navigation").getByRole("link", { name, exact: true });
     await link.focus();
     await page.keyboard.press("Tab");
@@ -96,6 +104,6 @@ async (page) => {
   }
   await page.locator(".about-actions").getByRole("link", { name: "Galeriyi İncele", exact: true }).click();
   await page.waitForURL("**/galeri");
-  results.push({ desktopAboutLink: true, mobileAboutLink: true, footerKeyboardLinks: 7, aboutActions: true });
+  results.push({ desktopAboutLink: true, mobileAboutLink: true, footerKeyboardLinks: routes.length, aboutActions: true });
   return results;
 }
