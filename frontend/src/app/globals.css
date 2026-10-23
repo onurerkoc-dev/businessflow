@@ -170,7 +170,7 @@
     min-height: var(--header-height);
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-6);
+    gap: clamp(1rem, 2vw, 2rem);
   }
 
   .brand {
@@ -205,7 +205,7 @@
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: clamp(1.25rem, 2.3vw, 2.25rem);
+    gap: clamp(1rem, 1.5vw, 1.5rem);
   }
 
   .nav-link {
@@ -1456,6 +1456,281 @@
 
     .service-detail--ceramic .detail-hero-media {
       aspect-ratio: 4 / 5;
+    }
+  }
+}
+
+@layer components {
+  .about-intro {
+    padding-block: var(--page-space) var(--space-7);
+  }
+
+  .about-intro h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-page-title);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  .about-lead {
+    max-width: 46ch;
+    margin-top: var(--space-6);
+    color: var(--muted);
+    font-size: var(--text-lead);
+    line-height: 1.8;
+  }
+
+  .about-feature {
+    padding-bottom: var(--space-7);
+  }
+
+  .about-feature-media, .about-preparation-media {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .about-feature-media {
+    aspect-ratio: 16 / 7;
+  }
+
+  .about-feature-media img {
+    object-fit: cover;
+    object-position: 50% 56%;
+  }
+
+  .about-page figcaption {
+    margin-top: var(--space-3);
+    color: var(--muted);
+    font-size: var(--text-small);
+    line-height: 1.7;
+  }
+
+  .about-editorial {
+    padding-block: var(--page-space);
+    background: var(--foreground);
+    color: var(--background);
+    color-scheme: light;
+  }
+
+  .about-page h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-section-title);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  .about-approach {
+    max-width: 65ch;
+    margin-inline: auto;
+    font-size: var(--text-lead);
+  }
+
+  .about-approach > p {
+    margin-top: var(--space-5);
+    font-size: var(--text-lead);
+    line-height: 1.8;
+  }
+
+  .about-approach > .about-demo-note {
+    margin-top: var(--space-6);
+    color: var(--muted-on-light);
+    font-size: var(--text-small);
+  }
+
+  .about-practice {
+    width: min(100%, 75rem);
+    margin-top: var(--page-space);
+    margin-inline: auto;
+  }
+
+  .about-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-block: var(--space-7) 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: application;
+  }
+
+  .about-steps li {
+    counter-increment: application;
+  }
+
+  .about-steps li::before {
+    display: block;
+    margin-bottom: var(--space-4);
+    color: var(--focus-on-light);
+    content: counter(application, decimal-leading-zero);
+    font-size: var(--text-small);
+  }
+
+  .about-steps h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .about-steps p {
+    max-width: 40ch;
+    margin-top: var(--space-3);
+    color: var(--muted-on-light);
+    line-height: 1.8;
+  }
+
+  .about-preparation {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .about-preparation-media {
+    aspect-ratio: 16 / 8;
+  }
+
+  .about-preparation-media img {
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  .about-editorial figcaption {
+    color: var(--muted-on-light);
+  }
+
+  .about-explore {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--page-space);
+  }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .site-footer {
+    padding-top: var(--page-space);
+    border-top: 1px solid var(--border);
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+    gap: var(--space-7);
+    padding-bottom: var(--page-space);
+  }
+
+  .footer-brand {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+  }
+
+  .footer-brand span {
+    color: var(--accent);
+    letter-spacing: 0;
+  }
+
+  .footer-identity p {
+    max-width: 32ch;
+    margin-top: var(--space-5);
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  .footer-navigation h2 {
+    margin-bottom: var(--space-4);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .footer-navigation ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-navigation a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .footer-navigation a:hover {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: var(--text-small);
+  }
+
+  @media (max-width: 63.999rem) {
+    .about-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 47.999rem) {
+    .about-intro {
+      padding-bottom: var(--space-6);
+    }
+
+    .about-feature-media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .about-steps {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: var(--space-6);
+    }
+
+    .about-preparation-media {
+      aspect-ratio: 3 / 2;
+    }
+
+    .about-actions {
+      width: 100%;
+    }
+
+    .about-actions .button {
+      flex: 1 1 12rem;
+    }
+
+    .footer-main {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+
+    .footer-identity {
+      grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
     }
   }
 }
