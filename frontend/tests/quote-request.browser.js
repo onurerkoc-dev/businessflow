@@ -3,7 +3,7 @@ async (page) => {
   const baseUrl = new URL(page.url()).origin;
   const assert = (condition, message) => { if (!condition) throw new Error(message); };
   const ready = async () => {
-    await page.locator(".quote-form button[type='submit']").waitFor();
+    await page.locator(".quote-form button[type='submit']:visible").waitFor();
     await page.waitForFunction(() => !document.querySelector(".quote-form button[type='submit']").disabled);
   };
   const fillValid = async () => {
@@ -13,6 +13,7 @@ async (page) => {
     await page.locator("#serviceSlug").selectOption("ppf-kaplama");
   };
   const check = () => page.getByRole("button", { name: "Bilgileri Kontrol Et", exact: true }).click();
+  const descriptionsResolve = () => page.locator(".quote-form [aria-describedby]").evaluateAll((fields) => fields.every((field) => field.getAttribute("aria-describedby").split(/\s+/).every((id) => document.getElementById(id))));
   const results = [];
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -21,11 +22,13 @@ async (page) => {
   assert(response.status() === 200 && await page.title() === "Teklif Al | VANTA", "Quote route and metadata");
   assert(await page.locator("h1").textContent() === "Aracınız İçin Teklif Alın", "Quote H1");
   assert(await page.locator('meta[name="robots"]').getAttribute("content") === "noindex, nofollow", "Noindex retained");
+  assert(await descriptionsResolve() && await page.locator("#message").getAttribute("aria-describedby") === "message-hint", "Message hint IDs resolve on initial form");
   await check();
   await page.waitForFunction(() => document.activeElement.id === "customerName");
   assert(await page.locator(".quote-error").count() === 5, "Five required errors");
   assert(await page.locator("#customerName").getAttribute("aria-invalid") === "true", "Invalid field state");
   assert(await page.locator("#customerName").getAttribute("aria-describedby") === "customerName-error", "Error association");
+  assert(await descriptionsResolve(), "All helper and error IDs resolve on invalid form");
   assert(await page.evaluate(() => {
     const luminance = (value) => {
       const rgb = value.match(/[\d.]+/g).slice(0, 3).map(Number).map((channel) => {
@@ -106,6 +109,9 @@ async (page) => {
     await ready();
     assert(await page.locator("#serviceSlug").inputValue() === "", "Unknown or duplicate selection rejected");
     assert(await page.locator("#serviceSlug-hint").isVisible(), "Invalid selection is explained");
+    assert(await page.locator("#serviceSlug").getAttribute("aria-describedby") === "serviceSlug-hint" && await descriptionsResolve(), "Invalid query hint ID resolves");
+    await check();
+    assert(await page.locator("#serviceSlug").getAttribute("aria-describedby") === "serviceSlug-hint serviceSlug-error" && await descriptionsResolve(), "Query and validation descriptions resolve together");
   }
   await page.goto(`${baseUrl}/teklif-al?other=detailing`);
   await ready();

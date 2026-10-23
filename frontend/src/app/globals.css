@@ -18,6 +18,7 @@
   --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Bahnschrift", "DIN Alternate", Arial, sans-serif;
   --text-small: 0.8125rem;
+  --text-caption: 0.875rem;
   --text-body: 1rem;
   --text-lead: clamp(1rem, 1.2vw, 1.125rem);
   --text-title: clamp(2.5rem, 4.45vw, 4rem);
@@ -278,7 +279,7 @@
   .hero-category {
     margin-bottom: var(--space-5);
     color: var(--foreground);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     line-height: 1.8;
@@ -650,7 +651,7 @@
     }
 
     .hero::before {
-      background: linear-gradient(0deg, rgb(10 15 17 / 96%) 0%, rgb(10 15 17 / 85%) 24%, rgb(10 15 17 / 20%) 65%, rgb(10 15 17 / 5%) 100%);
+      background: linear-gradient(0deg, rgb(10 15 17 / 96%) 0%, rgb(10 15 17 / 85%) 24%, rgb(10 15 17 / 60%) 65%, rgb(10 15 17 / 5%) 100%);
     }
 
     .hero-inner {
@@ -660,7 +661,6 @@
 
     .hero-category {
       margin-bottom: var(--space-4);
-      font-size: 0.5625rem;
       letter-spacing: 0.08em;
     }
 
@@ -674,10 +674,6 @@
       margin-top: var(--space-4);
       font-size: 0.9375rem;
       line-height: 1.7;
-    }
-
-    .hero-copy > .button {
-      margin-top: var(--space-5);
     }
 
     .service-entry, .service-entry--ppf {
@@ -844,7 +840,7 @@
 
   .collection-category {
     color: var(--muted-on-light);
-    font-size: var(--text-small);
+    font-size: var(--text-caption);
   }
 
   .collection-caption {
@@ -1256,7 +1252,7 @@
   .service-detail figcaption {
     margin-top: var(--space-3);
     color: var(--muted);
-    font-size: var(--text-small);
+    font-size: var(--text-caption);
     line-height: 1.7;
   }
 
@@ -1519,7 +1515,7 @@
   .about-page figcaption {
     margin-top: var(--space-3);
     color: var(--muted);
-    font-size: var(--text-small);
+    font-size: var(--text-caption);
     line-height: 1.7;
   }
 
@@ -1864,7 +1860,7 @@
   .contact-photo figcaption {
     margin-top: var(--space-3);
     color: var(--muted-on-light);
-    font-size: 0.875rem;
+    font-size: var(--text-caption);
     line-height: 1.7;
   }
 

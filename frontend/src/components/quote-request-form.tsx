@@ -34,13 +34,14 @@ const subscribe = () => () => {};
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 
-export function QuoteRequestForm({ services, initialServiceSlug, invalidInitialService }: {
+export function QuoteRequestForm({ services, initialServiceSlug, invalidInitialService, pending = false }: {
   services: QuoteServiceOption[];
   initialServiceSlug: string;
   invalidInitialService: boolean;
+  pending?: boolean;
 }) {
   // Disabled server HTML prevents native submission before JavaScript takes over.
-  const interactive = useSyncExternalStore(subscribe, clientSnapshot, serverSnapshot);
+  const interactive = useSyncExternalStore(subscribe, clientSnapshot, serverSnapshot) && !pending;
   const [values, setValues] = useState<QuoteRequestValues>({
     customerName: "", phone: "", email: "", vehicleBrand: "", vehicleModel: "", vehicleYear: "",
     serviceSlug: initialServiceSlug, message: "",
@@ -71,24 +72,29 @@ export function QuoteRequestForm({ services, initialServiceSlug, invalidInitialS
     setErrors((previous) => ({ ...previous, [field]: validate(values)[field] }));
   }
 
-  function describedBy(field: QuoteField, hint?: string) {
-    return [hint && `${field}-hint`, errors[field] && `${field}-error`].filter(Boolean).join(" ") || undefined;
+  function inputId(field: QuoteField) {
+    return pending ? `quote-loading-${field}` : field;
+  }
+
+  function describedBy(field: QuoteField, hasHint = false) {
+    const id = inputId(field);
+    return [hasHint && `${id}-hint`, errors[field] && `${id}-error`].filter(Boolean).join(" ") || undefined;
   }
 
   function renderInput(field: InputField) {
     const error = errors[field.name];
     return (
       <div className={`quote-field${field.wide ? " quote-field-wide" : ""}`} key={field.name}>
-        <label htmlFor={field.name}>{field.label}{!field.required && <span> (isteğe bağlı)</span>}</label>
+        <label htmlFor={inputId(field.name)}>{field.label}{!field.required && <span> (isteğe bağlı)</span>}</label>
         <input
-          id={field.name} type={field.type} required={field.required}
+          id={inputId(field.name)} type={field.type} required={field.required}
           autoComplete={field.autoComplete ?? "off"} inputMode={field.inputMode} maxLength={field.maxLength}
           value={values[field.name]} onChange={(event) => updateField(field.name, event.target.value)}
           onBlur={() => checkField(field.name)} aria-invalid={Boolean(error)}
-          aria-describedby={describedBy(field.name, field.hint)}
+          aria-describedby={describedBy(field.name, Boolean(field.hint))}
         />
-        {field.hint && <p className="quote-hint" id={`${field.name}-hint`}>{field.hint}</p>}
-        {error && <p className="quote-error" id={`${field.name}-error`}>{error}</p>}
+        {field.hint && <p className="quote-hint" id={`${inputId(field.name)}-hint`}>{field.hint}</p>}
+        {error && <p className="quote-error" id={`${inputId(field.name)}-error`}>{error}</p>}
       </div>
     );
   }
@@ -130,7 +136,7 @@ export function QuoteRequestForm({ services, initialServiceSlug, invalidInitialS
   return (
     <div className="quote-panel">
       {/* Nameless controls keep personal data out of native form serialization. */}
-      <form ref={formRef} className="quote-form" noValidate onSubmit={handleSubmit}>
+      <form ref={formRef} className="quote-form" aria-busy={pending || undefined} noValidate onSubmit={handleSubmit}>
         <p className="quote-form-note">İsteğe bağlı olarak belirtilmeyen alanlar zorunludur.</p>
         <fieldset disabled={!interactive}>
           <legend>Müşteri bilgileri</legend>
@@ -143,24 +149,24 @@ export function QuoteRequestForm({ services, initialServiceSlug, invalidInitialS
         <fieldset disabled={!interactive}>
           <legend>Hizmet seçimi</legend>
           <div className="quote-field">
-            <label htmlFor="serviceSlug">İlgilendiğiniz hizmet</label>
-            <select id="serviceSlug" required value={values.serviceSlug}
+            <label htmlFor={inputId("serviceSlug")}>İlgilendiğiniz hizmet</label>
+            <select id={inputId("serviceSlug")} required value={values.serviceSlug}
               onChange={(event) => updateField("serviceSlug", event.target.value)} onBlur={() => checkField("serviceSlug")}
-              aria-invalid={Boolean(errors.serviceSlug)} aria-describedby={describedBy("serviceSlug", invalidInitialService ? "query" : undefined)}>
+              aria-invalid={Boolean(errors.serviceSlug)} aria-describedby={describedBy("serviceSlug", invalidInitialService)}>
               <option value="">Bir hizmet seçin</option>
               {services.map((service) => <option key={service.slug} value={service.slug}>{service.title}</option>)}
             </select>
-            {invalidInitialService && <p className="quote-hint" id="serviceSlug-hint">Bağlantıdaki hizmet seçimi tanınmadı. Lütfen bir hizmet seçin.</p>}
-            {errors.serviceSlug && <p className="quote-error" id="serviceSlug-error">{errors.serviceSlug}</p>}
+            {invalidInitialService && <p className="quote-hint" id={`${inputId("serviceSlug")}-hint`}>Bağlantıdaki hizmet seçimi tanınmadı. Lütfen bir hizmet seçin.</p>}
+            {errors.serviceSlug && <p className="quote-error" id={`${inputId("serviceSlug")}-error`}>{errors.serviceSlug}</p>}
           </div>
         </fieldset>
         <div className="quote-field">
-          <label htmlFor="message">Ek açıklama <span>(isteğe bağlı)</span></label>
-          <textarea id="message" rows={4} maxLength={MESSAGE_MAX_LENGTH} value={values.message} disabled={!interactive}
+          <label htmlFor={inputId("message")}>Ek açıklama <span>(isteğe bağlı)</span></label>
+          <textarea id={inputId("message")} rows={4} maxLength={MESSAGE_MAX_LENGTH} value={values.message} disabled={!interactive}
             onChange={(event) => updateField("message", event.target.value)} onBlur={() => checkField("message")}
-            aria-invalid={Boolean(errors.message)} aria-describedby={describedBy("message", "count")} />
-          <p className="quote-hint" id="message-hint">Aracınızın durumunu veya uygulama beklentinizi paylaşabilirsiniz. {values.message.length} / {MESSAGE_MAX_LENGTH} karakter. Kimlik, plaka, şasi veya adres bilgisi eklemeyin.</p>
-          {errors.message && <p className="quote-error" id="message-error">{errors.message}</p>}
+            aria-invalid={Boolean(errors.message)} aria-describedby={describedBy("message", true)} />
+          <p className="quote-hint" id={`${inputId("message")}-hint`}>Aracınızın durumunu veya uygulama beklentinizi paylaşabilirsiniz. {values.message.length} / {MESSAGE_MAX_LENGTH} karakter. Kimlik, plaka, şasi veya adres bilgisi eklemeyin.</p>
+          {errors.message && <p className="quote-error" id={`${inputId("message")}-error`}>{errors.message}</p>}
         </div>
         <p className="quote-validation-status" role="status">{Object.values(errors).some(Boolean) ? "Lütfen işaretlenen alanları kontrol edin." : ""}</p>
         <div className="quote-submit">
